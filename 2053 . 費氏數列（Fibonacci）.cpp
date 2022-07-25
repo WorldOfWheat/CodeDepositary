@@ -34,7 +34,6 @@ vector2d matrixMultiply(vector2d x, vector2d y) {
 }
 
 int fastFib(int x) {
-    //x--;
     vector2d multi = {
         {0, 0, 0},
         {0, p, 1},
@@ -57,28 +56,6 @@ int fastFib(int x) {
 
 
 void solve() {
-
-    /*int n = 1, m = 1, o = 5, p = 10, q = 5;
-    vector2d multi = {
-        {0, 0, 0},
-        {0, p, 1},
-        {0, o, 0},
-    };
-    vector2d sum = {
-        {0, 0, 0},
-        {0, m, n},
-        {0, 0, 0},
-    };
-    for (int i = 1; i < 5; i++) {
-        for (int j = 1; j <= 2; j++) {
-            for (int k = 1; k <= 2; k++) {
-                cout << sum[j][k] << " ";
-            }
-            cout << endl;
-        }
-        cout << endl;
-        sum = matrixMultiply(sum, multi);
-    }*/
     cin >> n >> m >> o >> p >> q;
     cout << fastFib(q-2) << endl;
 }
