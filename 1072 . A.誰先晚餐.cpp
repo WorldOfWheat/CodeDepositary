@@ -9,36 +9,41 @@
 using namespace std;
 __attribute__((optimize("-O3")))
 
+struct cmp {
+    bool operator()(pii x, pii y) {
+        return x.S < y.S;
+    }
+};
+
+
 int n;
-priority_queue<pii> pq;
+priority_queue<pii, vector<pii>, cmp> pq;
 
 void solve() {
 
     for (int i = 0; i < n; i++) {
         int a, b;
         cin >> a >> b;
-        pq.push(mp(b, a));
+        pq.push( mp(a, b) );
     }
     int ans = 0;
-    int last = 0;
+    int now = 0;
     while (!pq.empty()) {
         pii top = pq.top();
         pq.pop();
-        last += top.S;
-        ans = max(ans, last+top.F);
+        now += top.F;
+        ans = max(ans, now + top.S);
     }
     cout << ans << "\n";
 
+    return;
 }
 
 signed main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    while (cin >> n) {
-        if (n == 0) return 0;
-        solve();
-    }
+    while (cin >> n, n) solve();
 
     return 0;
 }
