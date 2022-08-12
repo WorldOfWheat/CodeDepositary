@@ -73,3 +73,71 @@ signed main() {
 
     return 0;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <bits/stdc++.h>
+#define int long long
+#define pii pair<int, int>
+#define tp tuple<int, int, int>
+#define F first
+#define S second
+
+using namespace std;
+
+int n, m;
+vector<int> ve;
+vector<int> ve_left;
+vector<int> ve_right;
+
+void solve () {
+
+    cin >> n >> m;
+    int mid = (n >> 1);
+    ve.resize(n+1);
+    for (int i = 1 ; i <= n; i++) {
+        cin >> ve[i];
+    }
+    for (int i = 0; i < (1 << mid); i++) {
+        int sum = 0;
+        for (int j = 0; j < mid; j++) {
+            if (i & (1 << j)) {
+                //cerr << ve[j+1] << " ";
+                sum += ve[j+1];
+            }
+        }
+        //cerr << "\n";
+        ve_left.push_back(sum);
+    }
+    for (int i = 0; i < (1 << (mid + (n%2)) ); i++) {
+        int sum = 0;
+        for (int j = 0; j < mid + (n%2); j++) {
+            if (i & (1 << j)) {
+                //cerr << ve[j+mid+1] << " ";
+                sum += ve[j+mid+1];
+            }
+        }
+        //cerr << "\n";
+        ve_right.push_back(sum);
+    }
+
+    sort(ve_left.begin(), ve_left.end());
+    sort(ve_right.begin(), ve_right.end());
+    int ans = 0;
+    for (auto a : ve_left) {
+        auto it = lower_bound(ve_right.begin(), ve_right.end(), m - a);
+        auto it2 = upper_bound(ve_right.begin(), ve_right.end(), m - a);
+        ans += distance(it, it2);
+    }
+    cout << ans << "\n";
+
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    solve();
+
+    return 0;
+}
