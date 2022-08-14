@@ -36,7 +36,6 @@ void solve() {
         }
         else {
             int a = atoi(str.c_str());
-            //cerr << ((char) mp[a]) << "\n";
             ss << ((char) mp[a]);
         }
     }
