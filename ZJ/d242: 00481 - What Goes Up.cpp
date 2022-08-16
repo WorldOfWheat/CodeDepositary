@@ -38,21 +38,9 @@ void solve() {
             ve_dp[i] = distance(ve_mini.begin(), it) + 1;
         }
     }
-    /*for (int i = 0; i < _size; i++) {
-        cout << ve[i] << " ";
-    }
-    cout << "\n";
-    for (int i = 1; i <= _size; i++) {
-        cout << ve_dp[i] << " ";
-    }
-    cout << "\n";
-    for (int i = 0; i < _size; i++) {
-        cout << ve_mini[i] << " ";
-    }*/
     cout << ans << "\n" << "-" << "\n";
     vector<int> ve_ans;
     for (int i = _size; i >= 1; i--) {
-        //cout << ve_dp[i] << " " << ans << "\n";
         if (ve_dp[i] == ans) {
             ve_ans.push_back(ve[i-1]);
             ans--;
