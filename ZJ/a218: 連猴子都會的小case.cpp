@@ -7,7 +7,6 @@
 #define F first
 #define S second
 
-
 using namespace std;
 
 int n;
