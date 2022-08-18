@@ -2,28 +2,26 @@
 #define int long long
 #define ln "\n"
 #define sp " "
-#define pii pair<int, int>
-#define F first
-#define S second
 
 using namespace std;
 
 int n;
 vector<int> ve;
-vector<int> dp;
+vector<int> ve2;
 
 void solve() {
 
     cin >> n;
     ve.resize(n);
-    dp.resize(n+1);
-    for (int i = 0 ; i < n; i++) {
-        cin >> ve[i];
-        dp[ve[i]] = i;
+    ve2.resize(n);
+    for (int i = 0; i < n; i++) {
+        int a;
+        cin >> a;
+        ve[a-1] = i;
     }
     int ans = 1;
-    for (int i = 2; i <= n; i++) {
-        ans += dp[i-1] > dp[i];
+    for (int i = 1; i < n; i++) {
+        ans += (ve[i] < ve[i-1]);
     }
     cout << ans << ln;
 
