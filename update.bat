@@ -1,2 +1,3 @@
 git add .
-git commit -a -m "test"
+git commit -a --allow-empty-message -m ''
+push.bat
