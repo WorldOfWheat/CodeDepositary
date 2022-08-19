@@ -1,33 +1,40 @@
-
 #include <bits/stdc++.h>
 #define int long long
- 
+#define ln '\n'
+#define sp " "
+
 using namespace std;
-__attribute__((optimize("-O3")))
- 
-int arr[1000000+1];
- 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
- 
+
+vector<int> ve((int) 1e6+1);
+
+void solve() {
+
     int n;
     cin >> n;
-    int maxi = 0;
     for (int i = 0; i < n; i++) {
         int a;
         cin >> a;
-        arr[a]++;
-        maxi = max(maxi, a);
+        ve[a]++;
     }
-    int ans = 0;
-    for (int i = 1; i <= maxi; i++) {
+    int ans = 1;
+    for (int i = 1; i <= 1e6+1; i++) {
         int cnt = 0;
-        for (int j = i; j <= maxi; j+=i) {
-            cnt += arr[j];
+        for (int j = i; j <= 1e6+1; j+=i) {
+            cnt += ve[j];
         }
-        if (cnt > 1) ans = max(ans, i);
+        if (cnt >= 2) {
+            ans = max(ans, i);
+        }
     }
-    cout << ans << endl;
+    cout << ans << ln;
+
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    solve();
+
     return 0;
 }
