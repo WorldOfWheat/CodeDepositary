@@ -1,45 +1,41 @@
 #include <bits/stdc++.h>
 #define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
+#define ln '\n'
+#define sp " "
 
 using namespace std;
 
 int n;
+int times;
 vector<int> ve;
-int times = 1;
 
 class BIT_tree {
     public:
         BIT_tree(int x) {
-            _size = x+1;
+            _size = x + 1;
             data.resize(_size);
         }
-        void update(int pos, int x) {
+        void update(int pos, int value) {
             for (int i = pos; i <= _size; i+=getLowbit(i)) {
-                data[i] += x;
+                data[i] += value;
             }
         }
-        int query(int x) {
-            int sum = 0;
-            for (int i = x; i >= 1; i-=getLowbit(i)) {
-                sum += data[i];
+        int query(int pos) {
+            int res = 0;
+            for (int i = pos; i >= 1; i-=getLowbit(i)) {
+                res += data[i];
             }
-            return sum;
+            return res;
         }
-
     private:
-        vector<int> data;
         int _size;
+        vector<int> data;
         int getLowbit(int x) {
             return (x & -x);
         }
 };
 
-void discrete(vector<int> &x) {
+void disc(vector<int> &x) {
     vector<int> a;
     a.assign(x.begin(), x.end());
     sort(a.begin(), a.end());
@@ -51,23 +47,22 @@ void discrete(vector<int> &x) {
 
 void solve() {
 
-    ve.resize(n);
     BIT_tree bit(n);
-
+    ve.resize(n);
     for (int i = 0; i < n; i++) {
-        cin >> ve[i];
+        int a;
+        cin >> a;
+        ve[i] = a;
     }
-
-    discrete(ve);
-
+    disc(ve);
     int ans = 0;
     for (int i = 0; i < n; i++) {
-        ans += i - bit.query(ve[i]);
-        bit.update(ve[i], 1);
+        int top = ve[i];
+        ans += i - (bit.query(top));
+        bit.update(top, 1);
     }
-    cout << "Case #" << (times++) << ": " << ans << "\n";
+    cout << "Case #" << (++times) << ": " << ans <<ln;
 
-    return;
 }
 
 signed main() {
