@@ -1,41 +1,37 @@
 #include <bits/stdc++.h>
 #define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define F first
-#define S second
+#define ln '\n'
+#define sp " "
 
 using namespace std;
 
-int n;
-vector<int> ve(2000+1);
-priority_queue<int> pq;
+priority_queue<int, vector<int>, less<int>> pq;
 
-void solve () {
+void solve() {
 
+    int n;
     cin >> n;
-    for (int i = 1; i <= n; i++) {
-        cin >> ve[i];
-    }
     int ans = 0;
     int now = 0;
-    for (int i = 1; i <= n; i++) {
-        if (ve[i] >= 0) {
-            now += ve[i];
+    for (int i = 0; i < n; i++) {
+        int top;
+        cin >> top;
+        if (top >= 0) {
             ans++;
+            now += top;
         }
-        else if (ve[i] + now >= 0) {
+        else if (now + top >= 0) {
             ans++;
-            now += ve[i];
-            pq.push ( abs(ve[i]) );
+            now += top;
+            pq.push(abs(top));
         }
-        else if (pq.size() && abs(ve[i]) < pq.top()) {
-            now += pq.top() + ve[i];
+        else if (pq.size() && abs(top) < pq.top()) {
+            now += pq.top() + top;
             pq.pop();
-            pq.push( abs(ve[i]) );
+            pq.push(abs(top));
         }
     }
-    cout << ans << "\n";
+    cout << ans << ln;
 
 }
 
