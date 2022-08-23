@@ -1,13 +1,11 @@
 bool isPrime(int x) {
-    if (x <= 1 || x % 2 == 0 || x % 3 == 0) {
-        return false;
+    srand(time(0));
+    if (x <= 2) {
+        return x == 2;
     }
-    if (x == 2) {
-        return true;
-    }
-    int sw = 2;
-    for (int i = 5; i <= (int) sqrt(x); i += sw, sw = 6 - sw) {
-        if (x % i == 0) {
+    for (int i = 0; i < 20; i++) {
+        int r = ((rand() % ( (x - 1) - 2 + 1)) + 2);
+        if (fastpow(r, x - 1, x) != 1) {
             return false;
         }
     }
