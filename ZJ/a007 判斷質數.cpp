@@ -44,7 +44,7 @@ bool isPrime(int x) {
 
 void solve() {
 
-    cout << (isPrime(n) ? "½è¼Æ" : "«D½è¼Æ") << ln;
+    cout << (isPrime(n) ? "質數" : "非質數") << ln;
 
 }
 
