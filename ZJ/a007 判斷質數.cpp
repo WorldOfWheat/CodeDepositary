@@ -33,7 +33,6 @@ bool isPrime(int x) {
     if (x <= 2) {
         return x == 2;
     }
-
     for (int i = 0; i < 20; i++) {
         int r = ((rand() % ( (x - 1) - 2 + 1)) + 2);
         if (fastpow(r, x - 1, x) != 1) {
@@ -45,7 +44,7 @@ bool isPrime(int x) {
 
 void solve() {
 
-    cout << (isPrime(n) ? "���" : "�D���") << ln;
+    cout << (isPrime(n) ? "½è¼Æ" : "«D½è¼Æ") << ln;
 
 }
 
