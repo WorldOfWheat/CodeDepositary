@@ -1,8 +1,4 @@
-    ifstream cin;
-    ofstream cout;
-    cin.open("test_input.txt");
-    if (cin.fail()) {
-        cerr << "ERROR - Input" << "\n";
-        return;
-    }
-    cout.open("test_output.txt");
+void fileStream() {
+    freopen("test_input.txt", "r", stdin);
+    freopen("test_output.txt", "w", stdout);
+}
