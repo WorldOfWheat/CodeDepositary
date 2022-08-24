@@ -4,6 +4,6 @@ git commit -a --allow-empty-message -m ""
 
 pause
 
-git push test main
+git push origin main
 
 pause

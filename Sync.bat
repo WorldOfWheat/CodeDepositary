@@ -1,4 +1,4 @@
 cd "D:\Code\CodeDepositary"
-git pull test main
+git pull origin main
 
 pause
