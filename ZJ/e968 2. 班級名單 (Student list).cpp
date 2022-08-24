@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define int long long
-#define vv vector<vector<pii>>
+#define vv vector<vector<int>>
 #define pii pair<int, int>
 #define F first
 #define S second
@@ -13,9 +13,28 @@
 
 using namespace std;
 
+set<int> se;
+
 void solve() {
 
-
+    int n;
+    cin >> n;
+    rep2 (i, 1, n) {
+        se.insert(i);
+    }
+    rep (i, 0, 3) {
+        int a;
+        cin >> a;
+        se.erase(a);
+    }
+    int cnt = se.size();
+    for (auto it = se.rbegin(); it != se.rend(); it++) {
+        cout << "No. " << (*it);
+        cnt--;
+        if (cnt != 0) {
+            cout << (ln);
+        }
+    }
 
 }
 

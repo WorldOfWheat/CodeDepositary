@@ -1,41 +1,65 @@
 #include <bits/stdc++.h>
 #define int long long
+#define vv vector<vector<int>>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define pb push_back
+#define rep(x, y, z) for (int x = y; x < z; x++)
+#define rep2(x, y, z) for (int x = y; x <= z; x++)
+#define rrep(x, y, z) for (int x = y; x >= z; x--)
+#define ln "\n"
+#define sp " "
 
 using namespace std;
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+vector<int> ve;
+vector<int> ve2;
+
+void solve() {
 
     int n, m;
     cin >> n >> m;
-    vector<int> v;
-    for (int i = 0; i < n; i++) {
-        int maximum = 0;
-        for (int j = 0; j < m; j++) {
+    rep (i, 0, n) {
+        int maxi = -1e18;
+        rep (i, 0, m) {
             int a;
             cin >> a;
-            maximum = max(maximum, a);
+            maxi = max(maxi, a);
         }
-        v.push_back(maximum);
+        ve.pb(maxi);
     }
     int sum = 0;
-    for (auto a : v) sum += a;
-    cout << sum << endl;
-    stringstream ss;
-    bool flag = true;
-    for (auto a : v) {
-        if (sum % a == 0) {
-            ss << a << " ";
-            flag = false;
+    for (auto i : ve) {
+        sum += i;
+    }
+    for (auto i : ve) {
+        if (sum % i == 0) {
+            ve2.push_back(i);
         }
     }
-    if (flag)
-        cout << -1;
-    else {
-        string ans = ss.str();
-        ans.pop_back();
-        cout << ans << endl;
+    cout << (sum) << ln;
+    if (ve2.empty()) {
+        cout << -1 << ln;
+        return;
     }
+    rep (i, 0, ve2.size()) {
+        if (i != 0) {
+            cout << sp;
+        }
+        cout << (ve2[i]);
+    }
+    cout << ln;
+
+}
+
+signed main() {
+
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    solve();
+
     return 0;
+
 }
