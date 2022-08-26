@@ -1,3 +1,20 @@
+#include <bits/stdc++.h>
+#define int long long
+#define vv vector<vector<int>>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define pb push_back
+#define rep(x, y, z) for (int x = y; x < z; x++)
+#define rep2(x, y, z) for (int x = y; x <= z; x++)
+#define rrep(x, y, z) for (int x = y; x >= z; x--)
+#define ln "\n"
+#define sp " "
+
+using namespace std;
+
+vector<int> ve;
+
 struct node{
     int left;
     int right;
@@ -117,3 +134,36 @@ class seg_tree {
             pull(data[x], data[ data[x].lc ], data[ data[x].rc ]);
         }
 };
+
+void solve() {
+
+    int n, m;
+    cin >> n >> m;
+    ve.resize(n+1);
+    rep (i, 0, n) {
+        cin >> ve[i];
+    }
+    seg_tree seg(ve);
+    rep (i, 0, m) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        if (a == 1) {
+            seg.update_single(b, c);
+        }
+        else {
+            cout << (seg.query(b, c).sum) << ln;
+        }
+    }
+
+}
+
+signed main() {
+
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    solve();
+
+    return 0;
+
+}
