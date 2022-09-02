@@ -1,5 +1,4 @@
 void merge_sort(vector<int> &x, int l, int r) {
-
     if (l == r) {
         return;
     }
