@@ -14,8 +14,28 @@
 
 using namespace std;
 
-void solve() {
+V ve;
+set<int> se;
 
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    ve.resize(n);
+    rep (i, 0, n) {
+        cin >> ve[i];
+    }
+    int ans = 0;
+    int pf = 0;
+    rep (i, 0, n) {
+        pf += ve[i];
+        int re = pf - m;
+        auto it = se.lower_bound(re);
+        if (it != se.end()) {
+            ans = max(ans, pf - *it);
+        }
+        se.insert(pf);
+    }
+    cout << ans << ln;
 }
 
 signed main() {

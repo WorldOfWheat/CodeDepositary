@@ -14,8 +14,31 @@
 
 using namespace std;
 
-void solve() {
+struct cmp{
+    bool operator()(pii x, pii y){
+        return x.S < y.S;
+    }
+};
 
+priority_queue<pii, vector<pii>, cmp> pq;
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    rep (i, 0, n) {
+        int a, b;
+        cin >> a >> b;
+        pq.push({a, b});
+    }
+    int ans = 0;
+    while (pq.size() && m) {
+        pii top = pq.top();
+        pq.pop();
+        int k = min(top.F, m);
+        ans += top.S * k;
+        m -= k;
+    }
+    cout << ans << ln;
 }
 
 signed main() {

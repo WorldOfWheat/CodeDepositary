@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #define int long long
-#define V vector<int>
 #define vv vector<vector<int>>
 #define pii pair<int, int>
 #define F first
@@ -15,7 +14,13 @@
 using namespace std;
 
 void solve() {
-
+    int ans = 0;
+    rep (i, 0, 5) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        ans += (a + b > c) && (a + c > b) && (b + c > a);
+    }
+    cout << ans << ln;
 }
 
 signed main() {

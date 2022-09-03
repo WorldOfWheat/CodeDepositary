@@ -15,7 +15,27 @@
 using namespace std;
 
 void solve() {
+    int a, b;
+    cin >> a;
+    char symbol;
+    cin >> symbol >> b;
+    switch (symbol) {
+        case '+':
+            cout << (a+b) << ln;
+            break;
 
+        case '-':
+            cout << (a-b) << ln;
+            break;
+
+        case '*':
+            cout << (a*b) << ln;
+            break;
+
+        case '/':
+            cout << (a/b) << ln;
+            break;
+    }
 }
 
 signed main() {
