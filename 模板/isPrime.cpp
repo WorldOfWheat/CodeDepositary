@@ -4,8 +4,8 @@ bool isPrime(int x) {
         return x == 2;
     }
     for (int i = 0; i < 10; i++) {
-        int r = ((rand() % ( (x - 1) - 2 + 1)) + 2);
-        if (qpow(r, x - 1, x) != 1) {
+        int k = ((rand() % ( (x - 1) - 2 + 1)) + 2);
+        if (qpow(k, x - 1, x) != 1) {
             return false;
         }
     }
