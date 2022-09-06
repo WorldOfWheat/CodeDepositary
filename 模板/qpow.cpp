@@ -11,3 +11,19 @@ int qpow(int x, int y, int mod) {
     }
     return res;
 }
+
+///////////////////////////////////////////////////////////////
+
+int qpow(int x, int y, int mod) {
+    if (y == 0) {
+        return 1;
+    }
+    if (y == 1) {
+        return x;
+    }
+    if (y & 1) {
+        return x * qpow(x, y-1, mod) % mod;
+    }
+    int res = qpow(x, y >> 1, mod);
+    return res * res % mod;
+}
