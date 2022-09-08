@@ -13,28 +13,29 @@
 
 using namespace std;
 
-V ve;
-map<int, int> ma;
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
-        cin >> ve[i];
-    }
-    int l = 0;
-    int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
+    string str;
+    int n;
+    cin >> str >> n;
+    stringstream ss;
+    for (auto i : str) {
+        if (i - '0' == n) {
+            continue;
         }
-        ans += ((r - l + 1) == n);
+        ss << i;
     }
-    cout << (ans) << ln;
+    str = ss.str();
+    int l = 0, r = str.length() - 1;
+    while (l < r) {
+        if (str[l] != str[r]) {
+            cout << "No" << ln;
+            return;
+        }
+        l++;
+        r--;
+    }
+    cout << "Yes" << ln;
 }
 
 signed main() {

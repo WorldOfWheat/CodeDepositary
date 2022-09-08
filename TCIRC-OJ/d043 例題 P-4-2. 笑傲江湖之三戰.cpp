@@ -13,28 +13,31 @@
 
 using namespace std;
 
-V ve;
-map<int, int> ma;
+priority_queue<int, vector<int>, less<int>> pq;
+priority_queue<int, vector<int>, less<int>> pq2;
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
-        cin >> ve[i];
+    int n;
+    cin >> n;
+    rep (i, 0, n) {
+        int a;
+        cin >> a;
+        pq.push(a);
     }
-    int l = 0;
+    rep (i, 0, n) {
+        int a;
+        cin >> a;
+        pq2.push(a);
+    }
     int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
+    while (pq.size() && pq2.size()) {
+        if (pq.top() < pq2.top()) {
+            ans++;
+            pq2.pop();
         }
-        ans += ((r - l + 1) == n);
+        pq.pop();
     }
-    cout << (ans) << ln;
+    cout << ans << ln;
 }
 
 signed main() {

@@ -14,25 +14,45 @@
 using namespace std;
 
 V ve;
+int _type;
 map<int, int> ma;
 
+void discrete(V &x) {
+    V temp = x;
+    sort(temp.begin(), temp.end());
+    temp.erase(unique(temp.begin(), temp.end()), temp.end());
+    _type = temp.size();
+    for (auto &i : x) {
+        auto it = lower_bound(temp.begin(), temp.end(), i);
+        i = distance(temp.begin(), it) + 1;
+    }
+}
+
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
+    int n;
+    cin >> n;
+    ve.resize(n);
+    rep (i, 0, n) {
         cin >> ve[i];
     }
+    discrete(ve);
+    int ans = 1e18;
+    int cnt = 0;
     int l = 0;
-    int ans = 0;
-    rep (r, 0, m) {
+    int r;
+    for (r = 0; r < n; r++) {
         int top = ve[r];
+        if (!ma[top]) {
+            cnt++;
+        }
         ma[top]++;
-        while (ma[top] > 1) {
+        while (ma[ve[l]] > 1) {
             ma[ve[l]]--;
             l++;
         }
-        ans += ((r - l + 1) == n);
+        if (cnt == _type) {
+            ans = min(ans, r - l + 1);
+        }
     }
     cout << (ans) << ln;
 }

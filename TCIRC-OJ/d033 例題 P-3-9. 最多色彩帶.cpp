@@ -14,27 +14,39 @@
 using namespace std;
 
 V ve;
+deque<int> de;
 map<int, int> ma;
 
 void solve() {
     int n, m;
     cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
+    ve.resize(n);
+    rep (i, 0, n) {
         cin >> ve[i];
     }
-    int l = 0;
-    int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
+    int cnt = 0;
+    rep (i, 0, m) {
+        de.push_back(i);
+        if (!ma[ve[i]]) {
+            cnt++;
         }
-        ans += ((r - l + 1) == n);
+        ma[ve[i]]++;
     }
-    cout << (ans) << ln;
+    int ans = cnt;
+    rep (i, m, n) {
+        if (!ma[ve[i]]) {
+            cnt++;
+        }
+        ma[ve[i]]++;
+        de.push_back(i);
+        ma[ ve[de.front()] ]--;
+        if (!ma[ ve[de.front()] ]) {
+            cnt--;
+        }
+        de.pop_front();
+        ans = max(ans, cnt);
+    }
+    cout << ans << ln;
 }
 
 signed main() {

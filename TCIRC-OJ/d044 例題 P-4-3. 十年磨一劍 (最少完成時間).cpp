@@ -14,27 +14,21 @@
 using namespace std;
 
 V ve;
-map<int, int> ma;
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
+    int n;
+    cin >> n;
+    ve.resize(n);
+    rep (i, 0, n) {
         cin >> ve[i];
     }
-    int l = 0;
-    int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
-        }
-        ans += ((r - l + 1) == n);
+    sort(ve.begin(), ve.end());
+    int ans = ve[0];
+    rep (i, 1, n) {
+        ve[i] += ve[i-1];
+        ans += ve[i];
     }
-    cout << (ans) << ln;
+    cout << ans << ln;
 }
 
 signed main() {

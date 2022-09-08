@@ -13,28 +13,33 @@
 
 using namespace std;
 
-V ve;
-map<int, int> ma;
+struct cmp {
+    bool operator()(pii x, pii y) {
+        return x.S > y.S;
+    }
+};
+
+priority_queue<pii, vector<pii>, cmp> pq;
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
-        cin >> ve[i];
+    int n;
+    cin >> n;
+    rep (i, 0, n) {
+        int a, b;
+        cin >> a >> b;
+        pq.push({a, b});
     }
-    int l = 0;
+    int now = -1;
     int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
+    while (pq.size()) {
+        pii top = pq.top();
+        if (top.F > now) {
+            now = top.S;
+            ans++;
         }
-        ans += ((r - l + 1) == n);
+        pq.pop();
     }
-    cout << (ans) << ln;
+    cout << ans << ln;
 }
 
 signed main() {

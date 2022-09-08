@@ -13,28 +13,31 @@
 
 using namespace std;
 
-V ve;
-map<int, int> ma;
+vector<pii> ve;
+
+bool cmp(pii x, pii y) {
+    return (x.F*y.S < x.S*y.F);
+}
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
-        cin >> ve[i];
+    int n;
+    cin >> n;
+    ve.resize(n);
+    rep (i, 0, n) {
+        cin >> ve[i].F;
     }
-    int l = 0;
+    rep (i, 0, n) {
+        cin >> ve[i].S;
+    }
+    sort(ve.begin(), ve.end(), cmp);
+    rep (i, 1, n) {
+        ve[i].F += ve[i-1].F;
+    }
     int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
-        }
-        ans += ((r - l + 1) == n);
+    rep (i, 0, n) {
+        ans += ve[i].F * ve[i].S;
     }
-    cout << (ans) << ln;
+    cout << ans << ln;
 }
 
 signed main() {

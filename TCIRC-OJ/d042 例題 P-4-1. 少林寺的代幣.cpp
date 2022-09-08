@@ -13,35 +13,28 @@
 
 using namespace std;
 
-V ve;
-map<int, int> ma;
+V ve = {1, 5, 10, 50};
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    ve.resize(m);
-    rep (i, 0, m) {
-        cin >> ve[i];
-    }
-    int l = 0;
+    int n;
+    cin >> n;
     int ans = 0;
-    rep (r, 0, m) {
-        int top = ve[r];
-        ma[top]++;
-        while (ma[top] > 1) {
-            ma[ve[l]]--;
-            l++;
+    rrep (i, 3, 0) {
+        if (n >= ve[i]) {
+            ans += (n / ve[i]);
+            n %= ve[i];
         }
-        ans += ((r - l + 1) == n);
     }
-    cout << (ans) << ln;
+    cout << ans << ln;
 }
 
 signed main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    solve();
+    int t;
+    cin >> t;
+    while (t--) solve();
 
     return 0;
 }
