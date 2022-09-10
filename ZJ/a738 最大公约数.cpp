@@ -11,25 +11,28 @@
 #define rrep(x, y ,z) for(int x = y; x >= z; x--)
 #define ln "\n"
 #define sp " "
-#define MAXN (LLONG_MAX - 1)
 
 using namespace std;
 
+int n, m;
 
+int _gcd(int x, int y) {
+	if (y > x) {
+		return gcd(y, x);
+	}
+	if (y == 0) {
+		return x;
+	}
+	return gcd(y, x % y);
+}
 
 void solve() {
-	
-
-
+	cout << (_gcd(n, m)) << ln;
 }
 
 signed main() {
-    
-	ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(0);
-
-    solve();
-
+    while (cin >> n >> m) solve();
     return 0;
-
 }

@@ -11,25 +11,18 @@
 #define rrep(x, y ,z) for(int x = y; x >= z; x--)
 #define ln "\n"
 #define sp " "
-#define MAXN (LLONG_MAX - 1)
 
 using namespace std;
 
-
-
 void solve() {
-	
-
-
+	string str;
+	getline(cin, str);
+	cout << "Go, " << str << ", go go";
 }
 
 signed main() {
-    
-	ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(0);
-
     solve();
-
     return 0;
-
 }

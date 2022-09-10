@@ -11,15 +11,25 @@
 #define rrep(x, y ,z) for(int x = y; x >= z; x--)
 #define ln "\n"
 #define sp " "
-#define MAXN (LLONG_MAX - 1)
+#define MAXN (LONG_LONG_MAX - 1)
 
 using namespace std;
 
-
-
 void solve() {
 	
+	int n;
+	cin >> n;
 
+	int ans = 0;
+	int mini = MAXN;
+	rep (i, 0, n) {
+		int in;
+		cin >> in;
+		ans = max(ans, in - mini);
+		mini = min(mini, in);
+	}
+
+	cout << ans << ln;
 
 }
 
