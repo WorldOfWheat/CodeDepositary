@@ -1,4 +1,4 @@
-cd "D:\Code\test"
+cd "D:\Code\CodeDepositary"
 
 git pull origin main
 
