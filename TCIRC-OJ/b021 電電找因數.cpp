@@ -15,11 +15,29 @@
 
 using namespace std;
 
-
+int n;
+set<int> se;
 
 void solve() {
-	
 
+	se.clear();
+
+	if (n == 1) {
+		cout << 1<< ln;
+		return;
+	}
+
+	rep2 (i, 1, n/2) {
+		if (n % i == 0) {
+			se.insert(n / i);
+			se.insert(i);
+		}
+	}
+
+	for (auto i : se) {
+		cout << i << sp;
+	}
+	cout << ln;
 
 }
 
@@ -28,7 +46,7 @@ signed main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 
-	solve();
+	while (cin >> n) solve();
 
 	return 0;
 

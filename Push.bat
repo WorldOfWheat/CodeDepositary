@@ -1,6 +1,7 @@
 cd "D:\Code\CodeDepositary"
+
 git add .
-git commit -S -a --allow-empty-message -m ""
+git commit -a --allow-empty-message -m ""
 
 pause
 
