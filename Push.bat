@@ -1,5 +1,5 @@
 git add .
-git commit -a --allow-empty-message -m ""
+git commit -a -S --allow-empty-message -m ""
 
 pause
 
