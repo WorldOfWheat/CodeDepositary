@@ -13,7 +13,7 @@ import math
 import time
 
 #start
-url = 'https://docs.google.com/forms/d/e/1FAIpQLSdVETnE4MwV-qBl76x-pkbJ9HDNQfjdrj6V6yoeQWh_AFWpnA/viewform'
+url = ''
 driver = webdriver.Chrome()  
 driver.get(url)
 time.sleep(0.5)
@@ -35,7 +35,7 @@ time.sleep(0.2)
 
 pyautogui.click(689,689,button='left')
 time.sleep(0.2)
-pyperclip.copy('吳子龍')
+pyperclip.copy('') #姓名
 pyautogui.keyDown('ctrl')
 pyautogui.press('v')
 pyautogui.keyUp('ctrl')

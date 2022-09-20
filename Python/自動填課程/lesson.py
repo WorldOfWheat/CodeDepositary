@@ -11,7 +11,7 @@ import csv
 import time
 
 #start
-url = 'https://docs.google.com/forms/d/e/1FAIpQLSdmbuZ7PIaskjiFMMwIBM67SoHC4UYDpLOXZuuRCN9IGoOZ6A/viewform'
+url = ''
 driver = webdriver.Chrome()  
 driver.get(url)
 time.sleep(0.5)
@@ -35,7 +35,7 @@ time.sleep(0.2)
 #keyin_name
 pyautogui.click(679,743,button='left')
 time.sleep(0.2)
-pyperclip.copy('吳子龍')
+pyperclip.copy('') #姓名
 pyautogui.keyDown('ctrl')
 pyautogui.press('v')
 pyautogui.keyUp('ctrl')
