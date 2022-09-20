@@ -1,0 +1,4 @@
+com\groupcode\function\api_groupcode.class
+com\groupcode\App.class
+com\groupcode\function\cfg_groupcode.class
+com\groupcode\function\cmd_groupcode.class

@@ -1,0 +1,110 @@
+main: com.wow.App
+name: WOW
+author: WorldOfWheat
+version: 2.1
+
+commands:
+  #customban
+  customban:
+    description: can kick warn ban player
+  #hat
+  hat:
+    description: put the item to the head
+  #teampvp
+  teampvp:
+    description: get help message
+  #wow
+  wow:
+    description: run main command
+
+permissions:
+  #customban
+  wow.customban.*:
+    description: All permission
+    children:
+      wow.customban.help: true
+      wow.customban.unban: true
+      wow.customban.frezze: true
+      wow.customban.unfrezze: true
+      wow.customban.kick: true
+      wow.customban.warnlist: true
+      wow.customban.ban: true
+      wow.customban.delwarn: true
+      wow.customban.warn: true
+      wow.customban.tempban: true
+      wow.customban.help: true
+    description: get help messages
+  wow.customban.unban:
+    description: unban player
+  wow.customban.frezze:
+    description: make player can't move
+  wow.customban.unfrezze:
+    description: unfrezze a player
+  wow.customban.banlist:
+    description: list all banned player
+  wow.customban.frezzelist:
+    description: list all frezzed player
+  wow.customban.kick:
+    description: kick player
+  wow.customban.warnlist:
+    description: list player's warns
+  wow.customban.ban:
+    description: ban player
+  wow.customban.delwarn:
+    description: delete the player's warn
+  wow.customban.warn:
+    description: warn player
+  wow.customban.tempban:
+    description: tempban player
+  #shulkerboxfix
+  wow.shulkerboxfix.notify:
+    description: can receive the build notfy when player build on 255 or 0
+  #teampvp
+  wow.teampvp.*:
+    description: All permission
+    children:
+      wow.teampvp.help: true
+      wow.teampvp.create: true
+      wow.teampvp.add: true
+      wow.teampvp.remove: true
+      wow.teampvp.setflag: true
+      wow.teampvp.pairs.list: true
+      wow.teampvp.pairs.delete: true
+      wow.teampvp.pairs.join: true
+      wow.teampvp.pairs.loc: true
+      wow.teampvp.pairs.create: true
+      wow.teampvp.pairs.autobalance: true
+  wow.teampvp.help:
+    description: get help message
+  wow.teampvp.create:
+    description: create new team
+  wow.teampvp.delete:
+    description: delete a team
+  wow.teampvp.add:
+    description: add a player to a team
+  wow.teampvp.add.notify:
+    description: can receive the add message
+  wow.teampvp.remove:
+    description: remove a player from a team
+  wow.teampvp.setflag:
+    description: set team flag
+  wow.teampvp.pairs.list:
+    description: list all pairs
+  wow.teampvp.pairs.delete:
+    description: delete a pair
+  wow.teampvp.pairs.join:
+    description: join a pair
+  wow.teampvp.pairs.loc:
+    description: record the team location
+  wow.teampvp.pairs.create:
+    description: create a pair
+  wow.teampvp.pairs.autobalance:
+    description: switch autobalance
+  #bookfix
+  wow.bookfix.bypass:
+    description: bypass book check
+  wow.bookfix.notify:
+    description: notify the admin
+  #wow
+  wow.reload:
+    desccription: reload the whole plugin

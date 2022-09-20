@@ -1,0 +1,17 @@
+main: com.groupcode.App
+name: GroupCode
+author: WorldOfWheat
+version: 1.0
+
+commands:
+  #groupcode
+  groupcode:
+    description: enter code to set group
+
+
+permissions:
+  #groupcode
+  groupcode.generate:
+    description: generate code
+  groupcode.reload:
+    description: reload plugin

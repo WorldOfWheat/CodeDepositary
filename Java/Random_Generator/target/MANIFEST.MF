@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.6.3
+Built-By: a3028
+Build-Jdk: 16
+Main-Class: com.random_generator.App
+
