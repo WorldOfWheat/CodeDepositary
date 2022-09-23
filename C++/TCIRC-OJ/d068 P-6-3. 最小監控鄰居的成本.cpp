@@ -20,19 +20,20 @@ V dp;
 
 void solve() {
 	
-    int n;
+	int n;
+
 	cin >> n;
-	
+
 	ve.resize(n);
+	dp.resize(n+1);
+
 	rep (i, 0, n) {
 		cin >> ve[i];
 	}
 
-	dp.resize(n+1);
-	
 	dp[0] = INF;
-	dp[1] = ve[0];
 
+	dp[1] = ve[0];
 	if (n == 1) {
 		cout << (dp[1]) << ln;
 		return;
@@ -40,14 +41,14 @@ void solve() {
 
 	dp[2] = ve[1];
 	if (n == 2) {
-		cout << (min(dp[2], dp[1])) << ln;
+		cout << min(dp[1], dp[2]) << ln;
 		return;
 	}
 
-	dp[3] = min(dp[1], dp[2]) + ve[2];
+	dp[3] = min(dp[1], dp[2]) + ve[3-1];
 
 	rep2 (i, 4, n) {
-		dp[i] = ve[i-1] + min({dp[i-1], dp[i-2], dp[i-3]});
+		dp[i] = min({dp[i-1], dp[i-2], dp[i-3]}) + ve[i-1];
 	}
 
 	cout << (min(dp[n], dp[n-1])) << ln;

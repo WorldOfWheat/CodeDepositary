@@ -19,24 +19,24 @@ VP ve;
 VV dp;
 
 void solve() {
-
+	
 	int n, m;
+	
 	cin >> n >> m;
 
 	ve.resize(n);
+	dp.resize(n+1, V(2));
+
 	rep (i, 0, n) {
 		cin >> ve[i].F >> ve[i].S;
-	}
+	}	
 
-	dp.resize(n+1, V(2));
-	dp[1][0] = abs(ve[0].F - m);
-	dp[1][1] = abs(ve[0].S - m);
+	dp[1][0] = abs(m - ve[0].F);
+	dp[1][1] = abs(m - ve[0].S);
 
 	rep2 (i, 2, n) {
-		pii top = ve[i-1];
-		pii top2 = ve[i-2];
-		dp[i][0] = min(abs(top.F - top2.F) + dp[i-1][0], abs(top.F - top2.S) + dp[i-1][1]);
-		dp[i][1] = min(abs(top.S - top2.F) + dp[i-1][0], abs(top.S - top2.S) + dp[i-1][1]);
+		dp[i][0] = min(dp[i-1][0] + abs(ve[i-1].F - ve[i-1-1].F), dp[i-1][1] + abs(ve[i-1].F - ve[i-1-1].S));
+		dp[i][1] = min(dp[i-1][0] + abs(ve[i-1].S - ve[i-1-1].F), dp[i-1][1] + abs(ve[i-1].S - ve[i-1-1].S));
 	}
 
 	cout << (min(dp[n][0], dp[n][1])) << ln;

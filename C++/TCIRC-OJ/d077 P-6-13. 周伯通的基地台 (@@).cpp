@@ -17,11 +17,12 @@ using namespace std;
 
 V ve;
 V dp;
+deque<int> de;
 
 void solve() {
 	
-	int n;
-	cin >> n;
+	int n, m;
+	cin >> n >> m;
 
 	ve.resize(n);
 	dp.resize(n+1);
@@ -31,12 +32,27 @@ void solve() {
 	}
 
 	dp[1] = ve[0];
+	de.push_back(1);
 
 	rep2 (i, 2, n) {
-		dp[i] = max(dp[i-2] + ve[i-1], dp[i-1]);
+		if (i <= m+1) {
+			dp[i] = ve[i-1];
+		}
+		else {
+			if (de.front() < i - 2*m - 1) {
+				de.pop_front();
+			}
+			dp[i] = dp[de.front()] + ve[i-1];
+		}
+
+		while (de.size() && dp[de.back()] >= dp[i]) {
+			de.pop_back();
+		}
+
+		de.push_back(i);
 	}
 
-	cout << (dp[n]) << ln;
+	cout << (*min_element(dp.begin() + n - m, dp.end())) << ln;
 
 }
 
