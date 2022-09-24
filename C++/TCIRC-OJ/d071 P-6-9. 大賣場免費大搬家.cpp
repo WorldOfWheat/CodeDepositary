@@ -21,11 +21,12 @@ V dp;
 void solve() {
 
 	int n, m;
+	
 	cin >> n >> m;
 
 	ve.resize(n);
 	dp.resize(m+1);
-
+	
 	rep (i, 0, n) {
 		cin >> ve[i].F;
 	}
@@ -41,11 +42,11 @@ void solve() {
 				continue;
 			}
 
-			dp[j] = max(dp[j], dp[j-top.F] + top.S);
+			dp[j] = max(dp[j], dp[j - top.F] + top.S) ;
 		}
 	}
 
-	cout << dp[m] << ln;
+	cout << (dp[m]) << ln;
 
 }
 

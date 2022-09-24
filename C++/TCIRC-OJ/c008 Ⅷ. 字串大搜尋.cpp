@@ -24,14 +24,14 @@ void solve() {
 	dp.clear();
 	status.clear();
 
-	cout << str << sp << str2 << " = ";
+	cout << (str) << sp << (str2) << " = ";
 
 	int len = str.length();
 	int len2 = str2.length();
-	
+
 	dp.resize(len+1, V(len2+1));
 	status.resize(len+1, V(len2+1));
-
+	
 	rep2 (i, 1, len) {
 		rep2 (j, 1, len2) {
 			char top = str[i-1];
@@ -39,51 +39,57 @@ void solve() {
 
 			if (top == top2) {
 				dp[i][j] = dp[i-1][j-1] + 1;
-				status[i][j] = 1;
+				status[i][j] = 3;
+
 				continue;
 			}
 
 			if (dp[i-1][j] > dp[i][j-1]) {
 				dp[i][j] = dp[i-1][j];
-				status[i][j] = 2;
-			}
+
+				status[i][j] = 1;
+			}	
 			else {
 				dp[i][j] = dp[i][j-1];
-				status[i][j] = 3;
+
+				status[i][j] = 2;
 			}
 		}
 	}
 
 	stringstream ss;
 
-	int nowX = len;
-	int nowY = len2;
-	
-	while (nowX != 0 && nowY != 0) {
+	int nowX = len, nowY = len2;
+	while (nowX > 0 && nowY > 0) {
 		switch (status[nowX][nowY]) {
-			case 1:	
-				ss << (str[nowX-1]);
+			case 1:
 				nowX--;
+				break;
+
+			case 2:
 				nowY--;
 				break;
-			case 2:
-				nowX--;
-				break;
+
 			case 3:
+				ss << str[nowX-1];
+				nowX--;
 				nowY--;
 				break;
 		}
 	}
 
 	str = ss.str();
-	
-	if (str.empty()) {
-		cout << "0" << ln;
+
+	reverse(str.begin(), str.end());
+
+	if (str.length() == 0) {
+		cout << 0 << ln;
+		
 		return;
 	}
 
-	for (auto i = str.rbegin(); i != str.rend(); i++) {
-		cout << (*i);
+	for (auto i : str) {
+		cout << i;
 	}
 	cout << ln;
 

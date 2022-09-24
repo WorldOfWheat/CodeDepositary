@@ -16,17 +16,17 @@
 using namespace std;
 
 V ve;
-VV dp;
+V dp;
 
 void solve() {
 
 	int n, m, k;
 	cin >> n >> m >> k;
-	
-	int re = m - k;
+
+	int re =  m - k;
 
 	ve.resize(n);
-	dp.resize(n+1, V(re+1));
+	dp.resize(m+1);
 
 	int sum = 0;
 
@@ -36,18 +36,18 @@ void solve() {
 	}
 
 	rep2 (i, 1, n) {
-		int top = ve[i-1];
-		rep2 (j, 1, re) {
+		rrep (j, re, 1) {
+			int top = ve[i-1];
+
 			if (j < top) {
-				dp[i][j] = dp[i-1][j];
 				continue;
 			}
 
-			dp[i][j] = max(dp[i-1][j], dp[i-1][j - top] + top);
+			dp[j] = max(dp[j], dp[j - ve[i-1]] + ve[i-1]);
 		}
 	}
 
-	cout << (sum - dp[n][re]) << ln;
+	cout << (sum - dp[re]) << ln;
 
 }
 
