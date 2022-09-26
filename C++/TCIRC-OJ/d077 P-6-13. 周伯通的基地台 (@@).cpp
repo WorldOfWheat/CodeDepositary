@@ -2,7 +2,7 @@
 #define int long long
 #define V vector<int>
 #define VP vector<pii>
-#define vv vector<vector<int>>
+#define VV vector<vector<int>>
 #define pii pair<int, int>
 #define F first
 #define S second
@@ -20,9 +20,10 @@ V dp;
 deque<int> de;
 
 void solve() {
-	
+
 	int n, m;
-	cin >> n >> m;
+
+	cin >> n >> m;	
 
 	ve.resize(n);
 	dp.resize(n+1);
@@ -31,18 +32,17 @@ void solve() {
 		cin >> ve[i];
 	}
 
-	dp[1] = ve[0];
-	de.push_back(1);
+	rep2 (i, 1, n) {
+		int top = ve[i-1];
 
-	rep2 (i, 2, n) {
-		if (i <= m+1) {
-			dp[i] = ve[i-1];
+		if (i <= m + 1) {
+			dp[i] = top;
 		}
 		else {
-			if (de.front() < i - 2*m - 1) {
+			while (de.front() < i - 2 * m - 1) {
 				de.pop_front();
 			}
-			dp[i] = dp[de.front()] + ve[i-1];
+			dp[i] = dp[de.front()] + top;
 		}
 
 		while (de.size() && dp[de.back()] >= dp[i]) {
