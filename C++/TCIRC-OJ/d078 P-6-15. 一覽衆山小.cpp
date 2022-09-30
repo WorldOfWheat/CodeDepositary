@@ -17,16 +17,14 @@ using namespace std;
 
 V ve;
 V dp;
-V dp2;
 
 void solve() {
 
 	int n;
-	
+
 	cin >> n;
 
 	ve.resize(n);
-	dp.resize(n+1);
 
 	rep (i, 0, n) {
 		cin >> ve[i];
@@ -34,20 +32,21 @@ void solve() {
 
 	int ans = -INF;
 
-	rep2 (i, 1, n) {
-		int top = ve[i-1];
-	
-		if (dp2.size() && top <= dp2.back()) {
-			auto it = lower_bound(dp2.begin(), dp2.end(), top);
-			*it = top;
-		} else {
-			dp2.push_back(top);
+	dp.push_back(ve[0]);
+
+	rep (i, 1, n) {
+		if (ve[i] > dp.back()) {
+			dp.push_back(ve[i]);
+		}
+		else {
+			auto it = lower_bound(dp.begin(), dp.end(), ve[i]);
+			*it = ve[i];
 		}
 
-		ans = max(ans,  (int) dp2.size());
+		ans = max(ans, (int) dp.size());
 	}
 
-	cout << (ans) << ln;
+	cout << ans << ln;
 
 }
 

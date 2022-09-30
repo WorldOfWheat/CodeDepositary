@@ -18,21 +18,25 @@ using namespace std;
 V ve;
 VV dp;
 
-int dfs(int l, int r) { 
+int dfs(int l, int r) {
 
-	if (dp[l][r] >= 0) {
+	if (l + 1 >= r) {
+		return 0;
+	}
+
+	if (dp[l][r] != -1) {
 		return dp[l][r];
 	}
 
 	int res = INF;
 
 	rep (i, l+1, r) {
-		res = min(1ll * dfs(i, r) + dfs(l, i), res);
+		res = min(res, dfs(l, i) + dfs(i, r));
 	}
 
 	res += ve[r] - ve[l];
 
-	return (dp[l][r] = res);
+	return dp[l][r] = res;
 
 }
 
@@ -50,10 +54,6 @@ void solve() {
 
 	rep2 (i, 1, n) {
 		cin >> ve[i];
-	}
-
-	rep (i, 0, n+1) {
-		dp[i][i+1] = 0;
 	}
 
 	cout << (dfs(0, n+1)) << ln;

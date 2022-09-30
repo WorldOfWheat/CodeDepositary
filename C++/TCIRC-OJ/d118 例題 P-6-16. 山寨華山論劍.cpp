@@ -87,3 +87,87 @@ signed main() {
 	return 0;
 
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <bits/stdc++.h>
+#define int long long
+#define V vector<int>
+#define VP vector<pii>
+#define VV vector<vector<int>>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y ,z) for(int x = y; x < z; x++)
+#define rep2(x, y ,z) for(int x = y; x <= z; x++)
+#define rrep(x, y ,z) for(int x = y; x >= z; x--)
+#define ln "\n"
+#define sp " "
+#define INF (int) 1e18
+
+using namespace std;
+
+struct player {
+	int start;
+	int end;
+	int value;
+};
+
+vector<player> ve;
+V ve2;
+V dp;
+
+void solve() {
+
+	int n;
+
+	cin >> n;
+
+	ve.resize(n);
+	ve2.resize(n);
+	dp.resize(n+1);
+
+	rep (i, 0, n) {
+		cin >> ve[i].start >> ve[i].end >> ve[i].value;
+	}
+
+	sort(ve.begin(), ve.end(), [](player x, player y) {
+		return x.end < y.end;
+	});
+
+	rep (i, 0, n) {
+		ve2[i] = ve[i].end;
+	}
+
+	rep2 (i, 1, n) {
+		player top = ve[i-1];
+		
+		auto it = lower_bound(ve2.begin(), ve2.end(), top.start);
+
+		if (it == ve2.begin()) {
+			dp[i] = top.value;
+		}
+		else {
+			it = prev(it);
+
+			dp[i] = dp[distance(ve2.begin(), it) + 1] + top.value;
+		}
+
+		dp[i] = max(dp[i-1], dp[i]);
+
+	}
+
+	cout << (dp[n]) << ln;
+
+}
+
+signed main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	solve();
+
+	return 0;
+
+}
