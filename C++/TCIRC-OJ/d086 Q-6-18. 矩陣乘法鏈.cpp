@@ -28,16 +28,16 @@ int dfs(int l, int r) {
 		return dp[l][r];
 	}
 
-	int mini = INF;
+	int res = INF;
 
-	rep (i, l + 1, r) {
+	rep (i, l+1, r) {
 		int sum = dfs(l, i) + dfs(i, r);
 		sum += ve[l] * ve[i] * ve[r];
 
-		mini = min(sum, mini);
+		res = min(res, sum);
 	}
 
-	return dp[l][r] = mini;
+	return dp[l][r] = res;
 
 }
 
@@ -56,7 +56,7 @@ void solve() {
 		cin >> ve[i];
 	}
 
-	cout << (dfs(0, n-1)) << ln;
+	cout << (dfs(0, n - 1)) << ln;
 
 }
 
