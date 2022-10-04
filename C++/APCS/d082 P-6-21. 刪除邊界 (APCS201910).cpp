@@ -3,6 +3,8 @@
 #define VP vector<pii>
 #define V vector<int>
 #define VV vector<V>
+#define V3 vector<VV>
+#define V4 vector<V3>
 #define pii pair<int, int>
 #define F first
 #define S second
@@ -15,13 +17,19 @@
 
 using namespace std;
 
+
 int n, m;
 VV ve;
+V4 dp;
 
-int dfs(int row, int column, int d, int r, int sum) {
+int dfs(int row, int column, int d, int r) {
 
 	if (d - row == 0 || r - column == 0) {
-		return sum;
+		return 0;
+	}
+
+	if (dp[row][column][d][r] != -1) {
+		return dp[row][column][d][r];
 	}
 
 	int k = 0;
@@ -36,7 +44,7 @@ int dfs(int row, int column, int d, int r, int sum) {
 			k2++;
 		}
 	}
-	res = min(res, dfs(row+1, column, d, r, sum + min(k, k2)));
+	res = min(res, dfs(row+1, column, d, r) + (int) min(k, k2));
 
 	k = k2 = 0;
 	rep2 (i, column, r) {
@@ -47,7 +55,7 @@ int dfs(int row, int column, int d, int r, int sum) {
 			k2++;
 		}
 	}
-	res = min(res, dfs(row, column, d-1, r, sum + min(k, k2)));
+	res = min(res, dfs(row, column, d-1, r) + min(k, k2));
 
 	k = k2 = 0;
 	rep2 (i, row, d) {
@@ -58,7 +66,7 @@ int dfs(int row, int column, int d, int r, int sum) {
 			k2++;
 		}
 	}
-	res = min(res, dfs(row, column+1, d, r, sum + min(k, k2)));
+	res = min(res, dfs(row, column+1, d, r) + min(k, k2));
 
 	k = k2 = 0;
 	rep2 (i, row, d) {
@@ -69,9 +77,9 @@ int dfs(int row, int column, int d, int r, int sum) {
 			k2++;
 		}
 	}
-	res = min(res, dfs(row, column, d, r-1, sum + min(k, k2)));
+	res = min(res, dfs(row, column, d, r-1) + min(k, k2));
 
-	return res;
+	return dp[row][column][d][r] = res;
 
 }
 
@@ -80,6 +88,7 @@ void solve() {
 	cin >> n >> m;
 	
 	ve.resize(n, V(m));
+	dp.resize(n+1, V3(m+1, VV(n+1, V(m+1, -1))));
 
 	rep (i, 0, n) {
 		rep (j, 0, m) {
@@ -87,7 +96,7 @@ void solve() {
 		}
 	}
 
-	cout << (dfs(0, 0, n-1, m-1, 0)) << ln;
+	cout << (dfs(0, 0, n-1, m-1)) << ln;
 
 }
 
