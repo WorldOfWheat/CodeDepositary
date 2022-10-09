@@ -126,3 +126,103 @@ signed main() {
     return 0;
 }
 
+////////////////////////////////////////////////////////////////
+
+#include <bits/stdc++.h>
+#define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y ,z) for(int x = y; x < z; x++)
+#define rep2(x, y ,z) for(int x = y; x <= z; x++)
+#define rrep(x, y ,z) for(int x = y; x >= z; x--)
+#define ln "\n"
+#define sp " "
+#define INF (int) 1e18
+
+using namespace std;
+
+int n;
+VP ve;
+V vis;
+int ans = 0;
+
+int dfs(int l, int r) {
+
+	if (l >= r) {
+		return 0;
+	}
+
+	int mid = (l + r) / 2;
+	int res = dfs(l, mid) + dfs(mid + 1, r);
+
+	VP temp;
+	int l2 = l;
+	int r2 = mid + 1;
+	while (l2 <= mid && r2 <= r) {
+		if (ve[l2].F < ve[r2].F) {
+			temp.push_back(ve[l2]);
+			l2++;
+		}
+		else {
+			res += (l2 - l) * ve[r2].S;
+			temp.push_back(ve[r2]);
+			r2++;
+		}
+	}
+	while (l2 <= mid) {
+		temp.push_back(ve[l2]);
+		l2++;
+	}
+	while (r2 <= r) {
+		res += (l2 - l) * ve[r2].S;
+		temp.push_back(ve[r2]);
+		r2++;
+	}
+
+	rep2 (i, l, r) {
+		ve[i] = temp[i-l];
+	}
+
+	return res;
+
+}
+
+void solve() {
+
+	cin >> n;
+	n *= 2;
+
+	ve.resize(n);
+	vis.resize(n);
+
+	rep (i, 0, n) {
+		int a;
+		cin >> a;
+
+		if (vis[a]) {
+			ve[i] = {a, -1};	
+		}
+		else {
+			ve[i] = {a, 1};
+			vis[a] = true;
+		}
+	}
+
+	cout << abs(dfs(0, n - 1)) << ln;
+
+}
+
+signed main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	solve();
+
+	return 0;
+	
+}
