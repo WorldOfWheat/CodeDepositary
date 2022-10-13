@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 #define int long long
 #define V vector<int>
-#define VV vector<vector<int>>
+#define VV vector<V>
 #define VP vector<pii>
+#define VVP vector<VP>
 #define pii pair<int, int>
 #define F first
 #define S second
@@ -31,5 +32,5 @@ signed main() {
 	solve();
 
 	return 0;
-
+	
 }
