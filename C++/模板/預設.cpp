@@ -20,7 +20,7 @@ using namespace std;
 
 void solve() {
 
-	
+    
 
 }
 
@@ -32,5 +32,5 @@ signed main() {
 	solve();
 
 	return 0;
-	
+
 }

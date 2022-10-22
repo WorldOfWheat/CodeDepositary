@@ -220,3 +220,75 @@ signed main() {
 
     return 0;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+#include <bits/stdc++.h>
+#define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y ,z) for(int x = y; x < z; x++)
+#define rep2(x, y ,z) for(int x = y; x <= z; x++)
+#define rrep(x, y ,z) for(int x = y; x >= z; x--)
+#define ln "\n"
+#define sp " "
+#define INF (int) 1e18
+
+using namespace std;
+
+int n, m;
+V ve;
+V line;
+
+void solve() {
+
+    cin >> n >> m;
+
+    line.resize(n);
+    ve.resize(n);
+
+    rep2 (i, 1, m) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        a--;
+        b--;
+        line[a] += c;
+        line[b + 1] += -c;
+    }
+
+    int now = 0;
+    rep (i, 0, n) {
+        now += line[i];
+        line[i] = now;
+    }
+    sort(line.rbegin(), line.rend());
+
+    rep (i, 0, n) {
+        cin >> ve[i];
+    }
+    sort(ve.begin(), ve.end());
+
+    int ans = 0;
+    rep (i, 0, n) {
+        ans += ((*(next(ve.begin(), i))) * (*(next(line.begin(), i))));
+    }
+
+    cout << ans << ln;
+
+}
+
+signed main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	solve();
+
+	return 0;
+
+}

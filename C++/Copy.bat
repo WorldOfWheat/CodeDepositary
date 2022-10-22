@@ -1,1 +1,1 @@
-copy "D:\Git\test\test.cpp" "D:\Git\CodeDepositary\C++"
+copy "D:\Git\test\main.cpp" "D:\Git\CodeDepositary\C++"
