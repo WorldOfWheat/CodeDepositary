@@ -226,3 +226,99 @@ signed main() {
 	return 0;
 	
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <bits/stdc++.h>
+#define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y ,z) for(int x = y; x < z; x++)
+#define rep2(x, y ,z) for(int x = y; x <= z; x++)
+#define rrep(x, y ,z) for(int x = y; x >= z; x--)
+#define ln "\n"
+#define sp " "
+#define INF (int) 1e18
+
+using namespace std;
+
+int n;
+VP ve;
+V bit;
+
+int getLowbit(int x) {
+
+    return x & -x;
+
+}
+
+void update(int pos, int value) {
+
+    for (int i = pos; i <= n; i += getLowbit(i)) {
+        bit[i] += value;
+    }
+
+}
+
+int query(int pos) {
+
+    int res = 0;
+    for (int i = pos; i >= 1; i -= getLowbit(i)) {
+        res += bit[i];
+    }
+
+    return res;
+
+}
+
+void solve() {
+
+    cin >> n;
+
+    n *= 2;
+
+    ve.resize(n + 1);
+    bit.resize(n + 1);
+
+    rep2 (i, 1, n) {
+        int a;
+        cin >> a;
+
+        if (ve[a].F == 0) {
+            ve[a].F = i;
+        }
+        else {
+           ve[a].S = i;
+        }
+    }
+
+    int ans = 0;
+    rep2 (i, 1, n / 2) {
+        pii top = ve[i];
+
+        //cerr << top.F << sp << top.S <<ln;
+
+        ans += query(top.S) - query(top.F - 1);
+        update(top.F, 1);
+        update(top.S, 1);
+    }
+
+    cout << ans << ln;
+
+}
+
+signed main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	solve();
+
+	return 0;
+
+}
