@@ -17,33 +17,48 @@
 using namespace std;
 
 int n;
-set<string> se;
+VV graph;
+V mark;
+int ans;
+
+void dfs(int parent, int now) {
+
+	for (auto i : graph[now]) {
+		if (i == parent) {
+			continue;
+		}
+
+		dfs(now, i);
+	}
+
+	if (mark[now] == 0) {
+		mark[parent] = 1;
+		for (auto i : graph[parent]) {
+			mark[i] = 1;
+		}
+		ans++;
+	}
+
+}
 
 void solve() {
 
-    cin >> n;
-    rep (i, 0, n) {
-        string str;
-        cin >> str;
+	cin >> n;
 
-        se.insert(str);
-    }
+	graph.resize(n+1);
+	mark.resize(n+1);
 
-    int ans = 0;
-    for (auto i : se) {
-        int len = i.length();
+	rep (i, 1, n) {
+		int a, b;
+		cin >> a >> b;
 
-        if (len <= 2) {
-            continue;
-        }
-        rep2 (j, 1, len / 2) {
-            if (i.substr(0, j) == i.substr(len - j)) {
-                ans += se.count(i.substr(j, len - 2 * j));
-            }
-        }
-    }
+		graph[a].push_back(b);
+		graph[b].push_back(a);
+	}
 
-    cout << ans << ln;
+	dfs(0, 1);
+
+	cout << ans << ln;
 
 }
 
@@ -55,5 +70,5 @@ signed main() {
 	solve();
 
 	return 0;
-
+	
 }
