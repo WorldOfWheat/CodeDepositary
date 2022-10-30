@@ -13,3 +13,4 @@ b.sort()
 r.sendline(str(b[-3]).encode())
 
 print(r.recvline().decode())
+

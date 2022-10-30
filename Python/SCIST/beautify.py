@@ -1,8 +1,5 @@
 from pwn import *
 
-#8
-#sentence :
-
 r = remote("120.114.62.214", 2401)
 r.recvlines(8)
 
