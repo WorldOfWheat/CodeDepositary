@@ -1,43 +1,64 @@
 #include <bits/stdc++.h>
 #define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y, z) for(int x = y; x < z; x++)
+#define rep2(x, y, z) for(int x = y; x <= z; x++)
+#define rrep(x, y, z) for(int x = y; x >= z; x--)
+#define sp " "
+#define ln "\n"
 
 using namespace std;
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int n, m, o;
+VV ve;
+VV pf;
 
-    int n, m;
+void solve() {
+
     cin >> n >> m;
-    int num[n][m];
-    for (auto &a : num) {
-        for (auto &b : a) {
-            cin >> b;
+
+    ve.resize(n, V(m));
+    pf.resize(n + 1, V(m + 1));
+
+    rep (i, 0, n) {
+        rep (j, 0, m) {
+            cin >> ve[i][j];
         }
     }
-    int sum[n+1][m+1];
-    memset(&sum, 0, sizeof(sum));
-    sum[1][1] = num[0][0];
-    for (int i = 1; i < n; i++) {
-        sum[i+1][1] = sum[i][1] + num[i][0];
-    }
-    for (int i = 1; i < m; i++) {
-        sum[1][i+1] = sum[1][i] + num[0][i];
-    }
-    for (int i = 1; i < n; i++) {
-        for (int j = 1; j < m; j++) {
-            sum[i+1][j+1] = num[i][j] + sum[i][j+1] + sum[i+1][j] - sum[i][j];
+
+    rep2 (i, 1, n) {
+        rep2 (j, 1, m) {
+            pf[i][j] = pf[i-1][j] + (pf[i][j-1] - pf[i-1][j-1]) + ve[i-1][j-1];
         }
     }
-    int t;
-    cin >> t;
-    while (t--) {
+
+    cin >> o;
+
+    rep (i, 0, o) {
         int a, b, c, d;
         cin >> a >> b >> c >> d;
+        a++;
+        b++;
         c++;
         d++;
-        cout << sum[c][d] - sum[c][b] - sum[a][d] + sum[a][b] << endl;
+        cout << (pf[c][d] - pf[c][b-1] - pf[a-1][d] + pf[a-1][b-1]) << ln;
     }
 
+}
+
+signed main() {
+
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    solve();
+
     return 0;
+
 }

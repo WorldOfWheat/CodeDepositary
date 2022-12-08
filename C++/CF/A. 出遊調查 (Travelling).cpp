@@ -15,33 +15,25 @@
 
 using namespace std;
 
-int n, m;
-V ve;
-V pf;
+int n;
 
 void solve() {
     
     cin >> n;
     
-    ve.resize(n);
-    pf.resize(n + 1);
+    int k = n / 7;
+    int ans = (k / 2 * 1) + (k / 2 * 2) + (k % 2);
 
-    rep (i, 0, n) {
-        cin >> ve[i];
+    int p = n % 7;
+    if (k % 2) {
+        ans += (p >= 2) + (p >= 4);
+    }
+    else {
+        ans += (p >= 1);
     }
 
-    rep2 (i, 1, n) {
-        pf[i] = pf[i-1] + ve[i-1];
-    }
+    cout << ans << ln;
 
-   cin >> m;
-
-   rep (i, 0, m) {
-        int a, b;
-        cin >> a >> b;
-        cout << (pf[b] - pf[a-1]) << ln;
-    }
-        
 }
 
 signed main() {
