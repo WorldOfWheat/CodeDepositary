@@ -12,36 +12,34 @@
 #define rrep(x, y, z) for(int x = y; x >= z; x--)
 #define sp " "
 #define ln "\n"
+#define INF (int) 1e18
 
 using namespace std;
 
 int n, m;
 V ve;
-V pf;
+V ve2;
+
 
 void solve() {
-    
-    cin >> n;
-    
-    ve.resize(n);
-    pf.resize(n + 1);
 
-    rep (i, 0, n) {
-        cin >> ve[i];
-    }
+    while (cin >> n >> m) {
+        ve.resize(n);
 
-    rep2 (i, 1, n) {
-        pf[i] = pf[i-1] + ve[i-1];
-    }
+        rep (i, 0, n) {
+            cin >> ve[i];
+        }
 
-   cin >> m;
+        sort(ve.begin(), ve.end());
 
-   rep (i, 0, m) {
-        int a, b;
-        cin >> a >> b;
-        cout << (pf[b] - pf[a-1]) << ln;
-    }
-        
+        rep (i, 0, m) {
+            int a;
+            cin >> a;
+
+            auto it = upper_bound(ve.begin(), ve.end(), a);
+            cout << (distance(ve.begin(), it) % 2) << ln;
+        }
+    } 
 }
 
 signed main() {

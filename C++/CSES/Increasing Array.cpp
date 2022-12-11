@@ -15,40 +15,28 @@
 
 using namespace std;
 
-int n, m, o;
-VV ve;
-VV pf;
+int n;
+V ve;
 
 void solve() {
 
-    cin >> n >> m;
+    cin >> n;
 
-    ve.resize(n, V(m));
-    pf.resize(n + 1, V(m + 1));
+    ve.resize(n);
 
     rep (i, 0, n) {
-        rep (j, 0, m) {
-            cin >> ve[i][j];
+        cin >> ve[i];
+    }
+
+    int ans = 0;
+    rep (i, 1, n) {
+        if (ve[i] < ve[i-1]) {
+            ans += abs(ve[i] - ve[i-1]);
+            ve[i] = ve[i-1];
         }
     }
 
-    rep2 (i, 1, n) {
-        rep2 (j, 1, m) {
-            pf[i][j] = pf[i-1][j] + (pf[i][j-1] - pf[i-1][j-1]) + ve[i-1][j-1];
-        }
-    }
-
-    cin >> o;
-
-    rep (i, 0, o) {
-        int a, b, c, d;
-        cin >> a >> b >> c >> d;
-        a++;
-        b++;
-        c++;
-        d++;
-        cout << (pf[c][d] - pf[c][b-1] - pf[a-1][d] + pf[a-1][b-1]) << ln;
-    }
+    cout << ans << ln;
 
 }
 
