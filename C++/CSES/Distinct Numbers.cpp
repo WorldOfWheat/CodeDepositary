@@ -1,10 +1,17 @@
 #include <bits/stdc++.h>
 #define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
 #define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
 #define F first
 #define S second
+#define rep(x, y, z) for(int x = y; x < z; x++)
+#define rep2(x, y, z) for(int x = y; x <= z; x++)
+#define rrep(x, y, z) for(int x = y; x >= z; x--)
+#define INF (int) 1e18
+#define ln '\n'
 
 using namespace std;
 
@@ -14,20 +21,25 @@ set<int> se;
 void solve() {
 
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        se.insert(a);
+
+    rep (i, 0, n) {
+        int in;
+        cin >> in;
+
+        se.insert(in);
     }
-    cout << (se.size()) << "\n";
+
+    cout << (se.size()) << ln;
 
 }
 
 signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
 
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
     solve();
 
     return 0;
+
 }

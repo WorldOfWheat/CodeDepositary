@@ -16,40 +16,17 @@
 using namespace std;
 
 int n, m;
-multiset<int> ms;
 
 void solve() {
 
     cin >> n >> m;
 
-    rep (i, 0, n) {
-        int in;
-        cin >> in;
-
-        ms.insert(in);
+    if ((n + m) %3 == 0 && (min(n, m) * 2 >= max(n, m))) {
+        cout << "YES" << ln;
     }
-
-    int ans = 0;
-    while (ms.size()) {
-        int k = *ms.rbegin();
-        ms.erase(ms.find(k));
-
-        ans++;
-
-        if (ms.empty()) {
-            break;
-        }
-
-        auto it = ms.upper_bound(m - k);
-        if (it == ms.begin()) {
-            continue;
-        }
-        it--;
-
-        ms.erase(it);
+    else {
+        cout << "NO" << ln;
     }
-
-    cout << ans << ln;
 
 }
 
@@ -58,9 +35,10 @@ signed main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     
-    solve();
+    int t;
+    cin >> t;
+    while (t--) solve();
 
     return 0;
 
 }
-
