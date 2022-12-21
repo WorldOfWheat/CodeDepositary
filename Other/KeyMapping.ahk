@@ -1,3 +1,2 @@
-﻿CapsLock::Control
-^CapsLock::CapsLock
-
+﻿Control::Alt
+CapsLock::Control
