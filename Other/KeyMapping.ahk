@@ -1,5 +1,5 @@
 ﻿Control::Alt
 CapsLock::Control
-!CapsLock::CapsLock
-!LWin::WinSet, AlwaysOnTop, , A
+Alt & CapsLock::CapsLock
+Alt & LWin::WinSet, AlwaysOnTop, , A
 
