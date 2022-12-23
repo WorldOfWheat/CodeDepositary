@@ -1,37 +1,53 @@
 #include <bits/stdc++.h>
 #define int long long
-#define ln "\n"
-#define sp " "
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y, z) for(int x = y; x < z; x++)
+#define rep2(x, y, z) for(int x = y; x <= z; x++)
+#define rrep(x, y, z) for(int x = y; x >= z; x--)
+#define INF (int) 1e18
+#define ln '\n'
 
 using namespace std;
 
 int n;
-vector<int> ve;
-vector<int> ve2;
+V ve;
 
 void solve() {
 
     cin >> n;
-    ve.resize(n);
-    ve2.resize(n);
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        ve[a-1] = i;
-    }
-    int ans = 1;
-    for (int i = 1; i < n; i++) {
-        ans += (ve[i] < ve[i-1]);
-    }
-    cout << ans << ln;
 
+    ve.resize(n);
+    rep (i, 0, n) {
+        int in;
+        cin >> in;
+
+        ve[--in] = i;
+    }
+
+    int ans = 1;
+    rep (i, 1, n) {
+        if (ve[i] <= ve[i-1]) {
+            ans++; 
+        }
+    }
+
+    cout << ans << ln;
 }
 
-signed main () {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+signed main() {
 
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
     solve();
 
     return 0;
+
 }
+
