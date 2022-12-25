@@ -1,29 +1,54 @@
 #include <bits/stdc++.h>
 #define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
+#define pii pair<int, int>
+#define F first
+#define S second
+#define rep(x, y, z) for(int x = y; x < z; x++)
+#define rep2(x, y, z) for(int x = y; x <= z; x++)
+#define rrep(x, y, z) for(int x = y; x >= z; x--)
+#define INF (int) 1e18
+#define ln '\n'
 
 using namespace std;
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int n;
+V ans;
 
-    int n;
+void solve() {
     cin >> n;
-    vector<pair<int, int>> v;
-    while (n--) {
-        int a, b;
-        cin >> a >> b;
-        if (b > 100)
-            v.push_back(make_pair(a, b));
-    }
-    sort(v.begin(), v.end());
-    int sum = 0;
-    for (auto a : v) {
-        cout << a.first << " ";
-        sum += (a.second - 100)*5;
-    }
-    cout << endl << sum << endl;
 
+    int ans2 = 0;
+    rep (i, 0, n) {
+        int in, in2;
+        cin >> in >> in2;
+
+        if (in2 > 100) {
+            ans.push_back(in);
+            ans2 += (in2 - 100) * 5;
+        }
+    }
+
+    sort(ans.begin(), ans.end());
+
+    if (ans.size()) {
+        for (auto i : ans) {
+            cout << i << ' ';
+        }
+        cout << ln;
+    }
+    cout << ans2 << ln;
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    solve();
 
     return 0;
 }
+
