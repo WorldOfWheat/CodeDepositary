@@ -4,6 +4,7 @@
 #define VV vector<V>
 #define VP vector<pii>
 #define VVP vector<VP>
+#define VS vector<string>
 #define pii pair<int, int>
 #define F first
 #define S second
@@ -16,31 +17,26 @@
 using namespace std;
 
 int n;
-V ans;
+VS ve;
 
 void solve() {
     cin >> n;
-
-    int ans2 = 0;
+    
+    int maxiLen = -INF;
     rep (i, 0, n) {
-        int in, in2;
-        cin >> in >> in2;
-
-        if (in2 > 100) {
-            ans.push_back(in);
-            ans2 += (in2 - 100) * 5;
-        }
+        string in;
+        cin >> in;
+        ve.push_back(in);
+        maxiLen = max(maxiLen, (int) in.length()); 
     }
 
-    sort(ans.begin(), ans.end());
-
-    if (ans.size()) {
-        for (auto i : ans) {
-            cout << i << ' ';
+    rep (i, 0, maxiLen) {
+        rep (j, 0, n) {
+            if (ve[j].length() > i && !isdigit(ve[j][i])) {
+                 cout << ve[j][i];
+            }
         }
-        cout << ln;
     }
-    cout << ans2 << ln;
 }
 
 signed main() {

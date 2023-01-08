@@ -15,32 +15,35 @@
 
 using namespace std;
 
-int n;
-V ans;
+vector<string> ve;
 
 void solve() {
-    cin >> n;
+    string in;
+    while (true) {
+        ve.clear();
+        in = "";
 
-    int ans2 = 0;
-    rep (i, 0, n) {
-        int in, in2;
-        cin >> in >> in2;
-
-        if (in2 > 100) {
-            ans.push_back(in);
-            ans2 += (in2 - 100) * 5;
+        getline(cin, in);
+        if (in == "END") {
+            break;
         }
-    }
 
-    sort(ans.begin(), ans.end());
-
-    if (ans.size()) {
-        for (auto i : ans) {
-            cout << i << ' ';
+        string str = "";
+        for (auto i : in) {
+            if (i == ' ') {
+                ve.push_back(str);
+                str = "";
+                continue;
+            }
+            str += i;
         }
-        cout << ln;
+        ve.push_back(str);
+        
+        for (auto i : ve) {
+            cout << ((char) toupper(i[0]));
+        }
+        cout << ' ' << (ve.back()) << ln;
     }
-    cout << ans2 << ln;
 }
 
 signed main() {
