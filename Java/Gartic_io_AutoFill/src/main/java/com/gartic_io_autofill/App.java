@@ -26,20 +26,20 @@ public class App
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(data,data);
                 test.mouseMove(400, 820);
-                test.delay(18);
+                test.delay(20);
                 test.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
                 test.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
-                test.delay(18);
+                test.delay(20);
                 test.keyPress(KeyEvent.VK_CONTROL);
                 test.keyPress(KeyEvent.VK_V);
-                test.delay(18);
+                test.delay(20);
                 test.keyRelease(KeyEvent.VK_V);
                 test.keyRelease(KeyEvent.VK_CONTROL);
-                test.delay(18);
+                test.delay(20);
                 test.mouseMove(520, 820);
                 test.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
                 test.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
-                test.delay(18);
+                test.delay(20);
             }
         } 
         catch (AWTException e) 
