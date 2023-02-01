@@ -1,56 +1,46 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define sp " "
-#define ln "\n"
 
 using namespace std;
 
 int n, m;
-V ve;
-V pf;
+vector<long long> arr;
+vector<long long> prefixSum;
 
-void solve() {
-    
+void solve() 
+{
     cin >> n;
-    
-    ve.resize(n);
-    pf.resize(n + 1);
 
-    rep (i, 0, n) {
-        cin >> ve[i];
+    for (int i = 0; i < n; i++) 
+    {
+        long long input;
+        cin >> input;
+        arr.push_back(input);
     }
 
-    rep2 (i, 1, n) {
-        pf[i] = pf[i-1] + ve[i-1];
+    prefixSum.resize(n + 1);
+
+    for (int i = 1; i <= n; i++) 
+    {
+        prefixSum[i] = prefixSum[i-1] + arr[i-1];
     }
 
-   cin >> m;
+    cin >> m;
 
-   rep (i, 0, m) {
-        int a, b;
-        cin >> a >> b;
-        cout << (pf[b] - pf[a-1]) << ln;
+    for (int i = 0; i < m; i++) 
+    {
+        int input1, input2;
+        cin >> input1 >> input2;
+
+        cout << (prefixSum[input2] - prefixSum[input1 - 1]) << '\n';
     }
-        
 }
 
-signed main() {
-
+signed main() 
+{
     ios::sync_with_stdio(0);
     cin.tie(0);
-
+    
     solve();
 
     return 0;
-
 }
