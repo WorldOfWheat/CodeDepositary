@@ -1,71 +1,70 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define INF (int) 1e18
+
+typedef long long ll;
 
 using namespace std;
 
 string str;
 map<char, int> ma;
 
-void solve() {
+void solve() 
+{
+	cin >> str;
+	int length = str.length();
 
-    cin >> str;
+	for (int i = 0; i < length; i++)
+	{
+		ma[str[i]]++;
+	}
 
-    int len = str.length();
-    rep (i, 0, len) {
-        ma[str[i]]++;
-    }
-  
-    int isOdd = 0;
-    for (auto i : ma) {
-        if (i.S % 2 != 0) {
-            isOdd++;
-        }
-    }
-    if (isOdd >= 2) {
-        cout << "NO SOLUTION" << '\n';
-        return;
-    }
+	int counter = 0;
+	for (int i = 0; i < 26; i++)
+	{
+		if (ma[i + 'A'] % 2 == 1)
+		{
+			counter++;
+		}
+	}
+	if (counter >= 2)
+	{
+		cout << "NO SOLUTION" << '\n';
+		return;
+	}
 
-    string temp = "";
-    string temp2 = "";
-    string mid = "";
-    for (auto i : ma) {
-        if (i.S % 2 != 0) {
-            rep (j, 0, i.S) {
-                mid += i.F;
-            }
-            continue;
-        }
-        rep (j, 0, i.S / 2) {
-            temp += i.F;
-            temp2 += i.F;
-        }
-    }
+	string prefix = "";
+	string suffix = "";
+	string mid = "";
+	for (int i = 0; i < 26; i++)
+	{
+		int count = ma[i + 'A'];
+		char k = i + 'A';
+		if (count % 2)
+		{
+			for (int j = 0; j < count; j++)
+			{
+				mid += k;
+			}
+			continue;
+		}
+		for (int j = 0; j < count / 2; j++)
+		{
+			prefix += k;
+			suffix += k;
+		}
+	}
+	reverse(suffix.begin(), suffix.end());
+	string ans = prefix + mid + suffix;
 
-    reverse(temp2.begin(), temp2.end());
-
-    cout << (temp + mid + temp2) << '\n';
-
+	cout << ans << '\n';
 }
 
-signed main() {
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+    cout.tie(0);
 
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+	solve();
 
-    solve();
-
-    return 0;
-
+	return 0;
 }

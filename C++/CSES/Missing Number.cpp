@@ -1,37 +1,37 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define F first
-#define S second
 
 using namespace std;
 
 int n;
-set<int> se;
+vector<bool> arr;
 
-void solve() {
-
-    cin >> n;
-    for (int i = 1; i <= n; i++) {
-        se.insert(i);
-    }
-    for (int i = 0; i < n - 1; i++) {
-        int a;
-        cin >> a;
-        se.erase(a);
-    }
-    for (auto a : se) {
-        cout << a << " ";
-    }
-
+void solve() 
+{
+	cin >> n;
+	arr.resize(n);
+	for (int i = 0; i < n - 1; i++)
+	{
+		int k;
+		cin >> k;
+		arr[k-1] = 1;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] == 0)
+		{
+			cout << i + 1;
+		}
+	}
+	cout << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+    cout.tie(0);
 
-    solve();
+	solve();
 
-    return 0;
+	return 0;
 }

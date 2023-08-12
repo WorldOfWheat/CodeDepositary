@@ -1,41 +1,42 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define F first
-#define S second
+
+typedef long long ll;
 
 using namespace std;
 
 int n;
-int cnt;
+int ans;
 stringstream ss;
 
-void dfs(int x, int y, int z, int w) {
-    if (w == 1) {
-        ss << x << " " << z << "\n";
-        cnt++;
-        return;
-    }
-    dfs(x, z, y, w - 1);
-    ss << x << " " << z << "\n";
-    cnt++;
-    dfs(y, x, z, w - 1);
+void dfs(int x, int y, int z, int count)
+{
+	if (count == 1)
+	{
+		ss << x << ' ' << z << '\n';
+		ans++;
+		return;
+	}
+
+	dfs(x, z, y, count-1);
+	ss << x << ' ' << z << '\n';
+	ans++;
+	dfs(y, x, z, count-1);
 }
 
-void solve () {
-
-    cin >> n;
-    dfs(1, 2, 3, n);
-    cout << cnt << "\n" << (ss.str()) << "\n";
-
+void solve()
+{
+	cin >> n;
+	dfs(1, 2, 3, n);
+	cout << ans << '\n' << (ss.str()) << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main() 
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
 
-    solve();
+	solve();
 
-    return 0;
+	return 0;
 }

@@ -1,30 +1,32 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define F first
-#define S second
+
+typedef long long ll;
 
 using namespace std;
 
+const int MOD = 1e9 + 7;
 int n;
 
-void solve() {
+void solve() 
+{
+	cin >> n;
+	ll ans = 1;
+	for (int i = 0; i < n; i++)
+	{
+		ans <<= 1;
+		ans %= MOD;
+	}
 
-    cin >> n;
-    int ans = 1;
-    while (n--) {
-        ans *= 2;
-        ans %= ((int) 1e9 + 7);
-    }
-    cout << (ans) << "\n";
-
+	cout << ans << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+    cout.tie(0);
 
-    solve();
+	solve();
 
-    return 0;
+	return 0;
 }

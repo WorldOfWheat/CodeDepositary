@@ -1,41 +1,50 @@
-
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define F first
-#define S second
-#define ln '\n'
 
 using namespace std;
 
 int n;
-list<int> li;
+vector<int> arr;
 
-void solve() {
+void solve() 
+{
+	cin >> n;
+	if (n == 1)
+	{
+		cout << "1" << '\n';
+		return;
+	}
 
-    cin >> n;
-    for (int i = 2; i <= n; i+=2) {
-        li.push_back(i);
-    }
-    if (li.size() && li.back() - 1 <= 1) {
-        cout << "NO SOLUTION" << ln;
-        return;
-    }
-    for (int i = 1; i <= n; i+=2) {
-        li.push_back(i);
-    }
-    for (auto a : li) {
-        cout << a << " ";
-    }
-    cout << ln;
+	arr.resize(n);
+	int counter = 0;
+	for (int i = 2; i <= n; i += 2)
+	{
+		arr[counter++] = i;
+	}
 
+	if (abs(arr[counter - 1] - 1) <= 1)
+	{
+		cout << "NO SOLUTION" << '\n';
+		return;
+	}
+
+	for (int i = 1; i <= n; i += 2)
+	{
+		arr[counter++] = i;
+	}
+	for (auto i : arr)
+	{
+		cout << i << ' ';
+	}
+	cout << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+    cout.tie(0);
 
-    solve();
+	solve();
 
-    return 0;
+	return 0;
 }

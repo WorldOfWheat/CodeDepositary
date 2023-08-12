@@ -1,44 +1,40 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define INF (int) 1e18
-#define ln '\n'
+
+typedef long long ll;
 
 using namespace std;
 
-int n, m;
+int n;
 
-void solve() {
-
-    cin >> n >> m;
-
-    if ((n + m) %3 == 0 && (min(n, m) * 2 >= max(n, m))) {
-        cout << "YES" << ln;
-    }
-    else {
-        cout << "NO" << ln;
-    }
-
+void solve() 
+{
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int a, b;
+		cin >> a >> b;
+		int o = (2 * a - b);
+		int p = (2 * b - a);
+		bool bo1 = (o % 3 == 0 && p % 3 == 0);
+		bool bo2 = (o >= 0 && p >= 0);
+		if (bo1 && bo2)
+		{
+			cout << "YES" << '\n';
+		}
+		else
+		{
+			cout << "NO" << '\n';
+		}
+	}
 }
 
-signed main() {
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+    cout.tie(0);
 
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    
-    int t;
-    cin >> t;
-    while (t--) solve();
+	solve();
 
-    return 0;
-
+	return 0;
 }

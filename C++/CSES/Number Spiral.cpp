@@ -1,62 +1,54 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define INF (int) 1e18
+
+typedef long long ll;
 
 using namespace std;
 
-int n;
+int t;
 
-void solve() {
-
-    cin >> n;
-
-    rep (i, 0, n) {
-        int a, b;
-        cin >> a >> b;
-
-        int ans;
-
-        if (a > b) {
-            if (a % 2) {
-                ans = (a - 1) * (a - 1) + 1;
-                ans += (b - 1);
-            }
-            else {
-                ans = a * a - (b - 1);
-            }
-        }
-        else {
-            if (b % 2 == 0) {
-                ans = (b - 1) * (b - 1) + 1;
-                ans += (a - 1);
-            }
-            else {
-                ans = b * b - (a - 1);
-            }
-        }
-
-        cout << ans << '\n';
-    }
-
+void solve() 
+{
+	cin >> t;
+	while (t--)
+	{
+		ll n, m;
+		cin >> n >> m;
+		ll maxi = max(n, m);
+		ll square = maxi * maxi;
+		ll spiral_number = square - (maxi - 1);
+		// printf("# %d %d %d\n", maxi, square, spiral_number);
+		if (maxi & 1)
+		{
+			if (n > m)
+			{
+				cout << (spiral_number - (maxi - m)) << '\n';
+			}
+			else
+			{
+				cout << (spiral_number + (maxi - n)) << '\n';
+			}
+		}
+		else
+		{
+			if (n > m)
+			{
+				cout << (spiral_number + (maxi - m)) << '\n';
+			}
+			else
+			{
+				cout << (spiral_number - (maxi - n)) << '\n';
+			}
+		}
+	}
 }
 
-signed main() {
+int main() 
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+    cout.tie(0);
 
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+	solve();
 
-    solve();
-
-    return 0;
-
+	return 0;
 }

@@ -1,35 +1,35 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define F first
-#define S second
+
+typedef long long ll;
 
 using namespace std;
 
 string str;
-set<int> se;
+int ans;
+stringstream ss;
 
-void solve() {
+void solve()
+{
+	cin >> str;
+	
+	sort(str.begin(), str.end());
 
-    cin >> str;
-    sort(str.begin(), str.end());
-    stringstream ss;
-    int cnt = 0;
-    do {
-        cnt++;
-        ss << str << "\n";
-    } while (next_permutation(str.begin(), str.end()));
+	do 
+	{
+		ss << str << '\n';
+		ans++;
+	} while (next_permutation(str.begin(), str.end()));
 
-    cout << cnt << "\n" << ss.str() << "\n";
-
+	cout << ans << '\n' << ss.str() << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main() 
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
 
-    solve();
+	solve();
 
-    return 0;
+	return 0;
 }
