@@ -10,28 +10,26 @@
 #define rep(x, y ,z) for(int x = y; x < z; x++)
 #define rep2(x, y ,z) for(int x = y; x <= z; x++)
 #define rrep(x, y ,z) for(int x = y; x >= z; x--)
-#define ln "\n"
-#define sp " "
-#define INF (int) 1e18
+#define rep_each(x, y) for (auto &x : y)
+#define INF INT64_MAX
+#define b2e(x) x.begin(), x.end()
+#define size(x) x.size()
 
 using namespace std;
 
-
-
-void solve() {
-
-    
-
+void solve()
+{
+    V ve = {1, 2, 3, 4, 5};
+    vector<int>
 }
 
-signed main() {
+signed main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
-	ios::sync_with_stdio(false);
-	cin.tie(0);
+    solve();
 
-	solve();
-
-	return 0;
-
+    return 0;
 }
-
