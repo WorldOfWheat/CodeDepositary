@@ -1,41 +1,48 @@
 #include <bits/stdc++.h>
-#define int long long
+#define fastio ios::sync_with_stdio; cin.tie(0); cout.tie(0)
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n;
 vector<int> arr;
-vector<int> psum;
 map<int, int> ma;
 
-void solve() {
+void solve()
+{
     cin >> n;
-    arr.resize(n);
-    for (auto &i : arr) {
-        cin >> i;
-    }
-
-    psum.resize(n + 1);
-    partial_sum(arr.begin(), arr.end(), psum.begin() + 1);
     
-    for (auto i : psum) {
-        ma[(i % n + n) % n]++;
+    arr.resize(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    
+    ll ans = 0;
+    ll current_sum = 0;
+    ma[0] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        current_sum += arr[i];
+        int mod;
+        if (current_sum < 0) 
+        {
+            // cerr << current_sum << '\t';
+            // cerr << (-(current_sum)) / n << '\t';
+            mod = current_sum + ((-(current_sum)) / n + 1) * n;
+            mod %= n;
+        }
+        else mod = current_sum % n;
+        // cerr << mod << '\n';
+        ans += ma[mod];
+        ma[mod]++;
     }
-
-    int ans = 0;
-    for (auto i : ma) {
-        int temp = i.second;
-        ans += (temp) * (temp - 1) / 2;
-    }
-
+    
     cout << ans << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
+int main()
+{
+    fastio;
     solve();
-
     return 0;
 }

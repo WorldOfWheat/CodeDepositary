@@ -1,45 +1,81 @@
-
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define F first
-#define S second
-#define ln '\n'
-#define mod (int)1e9+7
+#define fastio ios::sync_with_stdio; cin.tie(0); cout.tie(0)
+#define debug(container) for (auto i : container) cerr << i << ' '; cerr << '\n';
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
+const int MOD = 1e9 + 7;
 int n;
-vector<int> table((int) 1e6+1);
+vector<int> record(1e6 + 1);
 
-int dfs(int x) {
-    if (x < 0) {
-        return 0;
-    }
-    int a = table[x];
-    if (a != 0) {
-      return a;
-    }
-    int b = 0;
-    for (int i = 1; i <= 6; i++) {
-        b += dfs(x - i);
-        b %= mod;
-    }
-    table[x] = b;
-    return b;
-}
+int f(int x)
+{
+    if (x == 0) return 1;
+    if (record[x]) return record[x];
 
-void solve() {
+    int sum = 0;
+    for (int i = 1; i <= min(6, x); i++)
+    {
+        sum += f(x - i);
+        sum %= MOD;
+    }
 
-    table[0] = 1;
+    return record[x] = sum;
+} 
+
+void solve()
+{
     cin >> n;
-    cout << dfs(n) << ln;
-
+    cout << f(n) << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main()
+{
+    fastio;
+
+    solve();
+
+    return 0;
+}
+
+/* ####################################################################################### */
+
+#include <bits/stdc++.h>
+#define fastio ios::sync_with_stdio; cin.tie(0); cout.tie(0)
+#define debug(container) for (auto i : container) cerr << i << ' '; cerr << '\n';
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> pii;
+
+const int MOD = 1e9 + 7;
+int n;
+vector<int> dp(1e6 + 1);
+
+void solve()
+{
+    cin >> n;
+
+    dp[0] = 1;
+    for (int i = 1; i <= n; i++) 
+    {
+        for (int j = 1; j <= min(i, 6); j++)
+        {
+            dp[i] += dp[i-j];
+            dp[i] %= MOD;
+        }
+    }
+    
+    cout << dp[n] << '\n';
+}
+
+int main()
+{
+    fastio;
 
     solve();
 

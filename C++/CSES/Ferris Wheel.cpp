@@ -1,66 +1,52 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define INF (int) 1e18
-#define ln '\n'
+
+typedef long long ll;
+typedef std::pair<int, int> pii;
 
 using namespace std;
 
 int n, m;
-multiset<int> ms;
+vector<int> arr;
 
-void solve() {
-
+void solve()
+{
     cin >> n >> m;
-
-    rep (i, 0, n) {
-        int in;
-        cin >> in;
-
-        ms.insert(in);
+    arr.resize(n);
+    for (auto &i : arr)
+    {
+        cin >> i;
     }
 
+    sort(arr.begin(), arr.end());
+
+    int ptrL = 0, ptrR = arr.size() - 1;
     int ans = 0;
-    while (ms.size()) {
-        int k = *ms.rbegin();
-        ms.erase(ms.find(k));
-
+    int now = 0;
+    while (ptrL < ptrR)
+    {
+        now = 0;
+        if (now + arr[ptrR] <= m)
+        {
+            now += arr[ptrR--];
+        }
+        if (now + arr[ptrL] <= m)
+        {
+            now += arr[ptrL++];
+        }
         ans++;
-
-        if (ms.empty()) {
-            break;
-        }
-
-        auto it = ms.upper_bound(m - k);
-        if (it == ms.begin()) {
-            continue;
-        }
-        it--;
-
-        ms.erase(it);
     }
+    ans += ptrL == ptrR;
 
-    cout << ans << ln;
-
+    cout << ans << '\n'; 
 }
 
-signed main() {
-
+signed main()
+{
     ios::sync_with_stdio(0);
     cin.tie(0);
-    
+    cout.tie(0);
+
     solve();
 
     return 0;
-
 }
-

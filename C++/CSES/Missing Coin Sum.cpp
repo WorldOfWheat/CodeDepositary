@@ -1,43 +1,43 @@
 #include <bits/stdc++.h>
-#define int long long
-#define ln "\n"
-#define sp " "
-#define pii pair<int, int>
-#define F first
-#define S second
+#include <ranges> 
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n;
-vector<int> ve;
-vector<int> dp;
+vector<int> arr;
 
-void solve() {
-
+void solve()
+{
     cin >> n;
-    ve.resize(n);
-    dp.resize(n+1);
-    int maxi = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> ve[i];
-        maxi = max(maxi, ve[i]);
-    }
-    sort(ve.begin(), ve.end());
-    dp[0] = 1;
-    for (int i = 0; i < n; i++) {
-        //cerr << dp[i] << ln;
-        if (dp[i] < ve[i]) {
-            cout << dp[i] << ln;
+
+    arr.resize(n);
+
+    for (auto &i : arr)
+        cin >> i;
+    
+    sort(arr.begin(), arr.end());
+
+    ll ans = 1;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] > ans)  {
+            cout << (ans) << '\n';
             return;
         }
-        dp[i+1] = dp[i] + ve[i];
+
+        ans += arr[i];
     }
-    cout << dp[n] << ln;
+
+    cout << ans << '\n';;
 }
 
-signed main () {
-    ios::sync_with_stdio(false);
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

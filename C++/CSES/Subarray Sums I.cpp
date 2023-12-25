@@ -1,36 +1,52 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define F first
-#define S second
-#define ln "\n"
-#define sp " "
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n, m;
-map<int, int> mp;
+vector<int> arr;
 
-void solve() {
-
+void solve()
+{
     cin >> n >> m;
+    
+    arr.resize(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    
     int ans = 0;
-    int sum = 0;
-    mp[0] = 1;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        sum += a;
-        ans += mp[sum - m];
-        mp[sum]++;
+    int l = 0, r = 0;
+    int sum = arr[r];
+    while (r < n)
+    {
+        if (sum == m) 
+        {
+            ans++;
+            r++;
+            sum += arr[r];
+        }
+        
+        while (sum < m) 
+        {
+            r++;
+            sum += arr[r];
+        }
+        while (sum > m) 
+        {
+            sum -= arr[l];
+            l++;
+        }
     }
-    cout << ans << ln;
-
+    
+    cout << ans << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

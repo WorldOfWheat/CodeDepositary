@@ -17,6 +17,30 @@
 
 using namespace std;
 
+<<<<<<< HEAD
+void solve()
+=======
+<<<<<<< HEAD
+void solve() 
+>>>>>>> 81993d6 (Update CSES problem solutions)
+{
+    V ve = {1, 2, 3, 4, 5};
+    vector<int>
+}
+
+signed main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+
+<<<<<<< HEAD
+    return 0;
+=======
+	return 0;
+=======
 void solve()
 {
     V ve = {1, 2, 3, 4, 5};
@@ -32,4 +56,6 @@ signed main()
     solve();
 
     return 0;
+>>>>>>> f2d42c1 (Sort all files)
+>>>>>>> 81993d6 (Update CSES problem solutions)
 }

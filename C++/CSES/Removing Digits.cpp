@@ -1,40 +1,44 @@
 #include <bits/stdc++.h>
-#define int long long
-#define ln '\n'
-#define sp " "
 
 using namespace std;
 
-vector<int> dp((int) 1e6, (int) 1e18);
+typedef long long ll;
 
-void solve() {
+int n;
+vector<int> dp;
 
-    int n;
-    cin >> n;
-    for (int i = 0; i <= 9; i++) {
-        dp[i] = 1;
+int cal(int x)
+{
+    // cerr << x << '\n';
+    if (x <= 9) return 1;
+    if (dp[x] != 0) return dp[x];
+    
+    int lsb = x;
+    int minimum = 1e9;
+    while (lsb > 0)
+    {
+        int sub_num = lsb % 10;
+        if (sub_num != 0) minimum = min(cal(x - sub_num), minimum);
+        lsb /= 10;
     }
-    for (int i = 10; i <= n; i++) {
-        string str = to_string(i);
-        for (int j = 0; j < str.length(); j++) {
-            int top = str[j] - '0';
-            if (top == 0) {
-                continue;
-            }
-            dp[i] = min(dp[i - top] + 1, dp[i]);
-        }
-        /*for (int j = 1; j <= i; j++) {
-            cerr << dp[j] << sp;
-        }
-        cerr << ln;*/
-    }
-    cout << (dp[n]) << ln;
-
+    
+    return dp[x] = minimum + 1;
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
+void solve()
+{
+    cin >> n;   
+
+    dp.resize(n + 1);
+    
+    cout << cal(n) << '\n';
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

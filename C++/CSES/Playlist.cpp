@@ -1,35 +1,44 @@
 #include <bits/stdc++.h>
-#define int long long
-#define ln "\n"
-#define sp " "
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n;
-vector<int> ve;
-map<int, int> mp;
+vector<int> arr;
+map<int, int> visited;
 
-void solve() {
-
+void solve()
+{
     cin >> n;
-    ve.resize(n);
-    for (int i = 0; i < n; i++) {
-        cin >> ve[i];
-    }
-    int l = 0;
-    int ans = 0;
-    for (int i = 0; i < n; i++) {
-        l = max(l, mp[ve[i]]);
-        ans = max(ans, i - l + 1);
-        mp[ve[i]] = i+1;
-    }
-    cout << ans << ln;
 
+    arr.resize(n);
+
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    int ans = 1;
+    int j = 0;
+    visited[arr[j]]++;
+    for (int i = 1; i < n; i++)
+    {
+        while (visited[arr[i]] > 0)
+        {
+            visited[arr[j]]--;
+            j++;
+        }
+        visited[arr[i]]++;
+        ans = max(ans, i - j + 1);
+    }
+
+    cout << ans << '\n';
 }
 
-signed main () {
-    ios::sync_with_stdio(false);
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

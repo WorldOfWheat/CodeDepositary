@@ -1,39 +1,45 @@
 #include <bits/stdc++.h>
-#define int long long
-#define ln '\n'
-#define sp " "
+#define fastio ios::sync_with_stdio; cin.tie(0); cout.tie(0)
+#define debug_container(container) for (auto i : container) cerr << i << ' '; cerr << '\n';
+#define debug(x) cerr << x << '\n';
 
 using namespace std;
 
-vector<int> ve;
-vector<int> dp;
+typedef long long ll;
+typedef pair<int, int> pii;
 
-void solve() {
+const int MOD = 1e9 + 7;
+int n, m;
+vector<int> arr;
+vector<int> dp(1e6 + 1);
 
-    int n, m;
+void solve()
+{
     cin >> n >> m;
-    ve.resize(n);
-    dp.resize(m+1);
-    for (int i = 0; i < n; i++) {
-        cin >> ve[i];
+    
+    arr.resize(n);
+    for (int i = 0; i < n; i++) 
+    {
+        cin >> arr[i];
     }
+    
     dp[0] = 1;
-    for (int i = 0; i < n; i++) {
-        for (int j = 1; j <= m; j++) {
-            if (j < ve[i]) {
-                continue;
-            }
-            dp[j] += dp[j - ve[i]];
-            dp[j] %= (int) (1e9 + 7);
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 1; j <= m; j++) 
+        {
+            if (j - arr[i] < 0) continue;            
+            dp[j] += dp[j - arr[i]];
+            dp[j] %= MOD;
         }
     }
-    cout << (dp[m]) << ln;
-
+    
+    cout << dp[m] << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+int main()
+{
+    fastio;
 
     solve();
 

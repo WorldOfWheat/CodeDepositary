@@ -1,33 +1,39 @@
 #include <bits/stdc++.h>
-#define int long long
-#define ln "\n"
-#define sp " "
 
 using namespace std;
 
+typedef long long ll;
+
 int n;
-multiset<int> ms;
+vector<int> arr;
+vector<int> arr2;
 
-void solve() {
-
+void solve()
+{
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        auto it = ms.upper_bound(a);
-        ms.insert(a);
-        if (it == ms.end()) {
-            continue;
-        }
-        ms.erase(it);
-    }
-    cout << ms.size() << ln;
 
+    arr.resize(n);
+
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    for (int i = 0; i < n; i++)
+    {
+        auto upper = upper_bound(arr2.begin(), arr2.end(), arr[i]);
+        if (upper == arr2.end()) arr2.push_back(arr[i]);
+        else 
+        {
+            *upper = arr[i];
+        }
+    }
+
+    cout << (arr2.size()) << '\n';
 }
 
-signed main () {
-    ios::sync_with_stdio(false);
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

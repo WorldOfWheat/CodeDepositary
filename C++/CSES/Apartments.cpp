@@ -1,61 +1,62 @@
 #include <bits/stdc++.h>
 #define int long long
+#define V vector<int>
+#define VV vector<V>
+#define VP vector<pii>
+#define VVP vector<VP>
 #define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
 #define F first
 #define S second
+#define rep(x, y ,z) for(int x = y; x < z; x++)
+#define rep2(x, y ,z) for(int x = y; x <= z; x++)
+#define rrep(x, y ,z) for(int x = y; x >= z; x--)
+#define rep_each(x, y) for (auto &x : y)
+#define INF INT64_MAX
+#define b2e(x) x.begin(), x.end()
 
 using namespace std;
 
-int n, m, o;
-priority_queue<int, vector<int>, less<int> > pq;
+int n, m, k;
 multiset<int> ms;
+multiset<int> ms2;
 
-void solve() {
+void solve()
+{
+    cin >> n >> m >> k;
 
-    cin >> n >> m >> o;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        pq.push(a);
+    rep (i, 0, n)
+    {
+        int tmp;
+        cin >> tmp;
+        ms.insert(tmp);
     }
-    for (int i = 0; i < m; i++) {
-        int a;
-        cin >> a;
-        ms.insert(a);
+    rep (i, 0, m)
+    {
+        int tmp;
+        cin >> tmp;
+        ms2.insert(tmp);
     }
-    //cerr << "\n";
+
     int ans = 0;
-    while (pq.size()) {
-        int top = pq.top();
-        pq.pop();
-        if (ms.empty()) {
-            break;
-        }
-        int remain_a = top - o;
-        int remain_b = top + o;
-        //cerr << remain_a << " " << remain_b << "\n";
-        auto it = ms.lower_bound(remain_a);
-        auto it2 = ms.upper_bound(remain_b);
-        it2--;
-        //cerr << (*it) << " " << (*it2) << "\n";
-        if (remain_a <= (*it2) && (*it2) <= remain_b) {
-            ms.erase(it2);
+    rep_each(i, ms)
+    {
+        int a = max(0ll, i - k);
+        auto lower = ms2.lower_bound(a);
+        if (lower != ms2.end() && abs(*lower - i) <= k)
+        {
             ans++;
-        }
-        else if (remain_a <= (*it) && (*it) <= remain_b) {
-            ms.erase(it);
-            ans++;
+            ms2.erase(lower);
         }
     }
-    cout << ans << "\n";
 
+    cout << ans << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
+signed main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

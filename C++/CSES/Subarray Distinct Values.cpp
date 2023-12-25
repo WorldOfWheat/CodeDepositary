@@ -1,121 +1,70 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
+#define fastio ios::sync_with_stdio; cin.tie(0); cout.tie(0)
+#define debug(container) for (auto i : container) cerr << i << ' '; cerr << '\n';
 
 using namespace std;
-__attribute__((optimize("-O3")))
+
+typedef long long ll;
+typedef pair<int, int> pii;
 
 int n, m;
-int arr[(int) 1e8+1];
+vector<int> arr;
+vector<int> record;
 
-void solve() {
-
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++) {
-        cin >> arr[i];
+void coord_compress(vector<int> &arr) 
+{
+    vector<int> mapping(arr);
+    sort(mapping.begin(), mapping.end());
+    mapping.erase(unique(mapping.begin(), mapping.end()));
+    
+    for (int i = 0; i < arr.size(); i++)
+    {
+        auto lower = lower_bound(begin(mapping), end(mapping), arr[i]);
+        int index = distance(begin(mapping), lower);
+        arr[i] = index;        
     }
-    map<int, int> ump;
-    int ans = 0;
-    int cnt = 0;
-    int r = 0;
-    for (int i = 1; i <= n; i++) {
-        while (r <= n && cnt <= m) {
-            r++;
-            //cout << cnt << " " << arr[r] << " " << r << endl;
-            ump[arr[r]]++;
-            if (ump[arr[r]] == 1) {
-                cnt++;
-            }
-            //cout << cnt << " " << arr[r] << " " << r << endl;
-        }
-        //cout << endl;
-        //cout << r << " " << i << endl;
-        ans += r - i;
-        //cout << ans << endl << endl;
-        ump[arr[i]]--;
-        if (ump[arr[i]] == 0) {
-            cnt--;
-        }
-    }
-    cout << ans << endl;
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+void solve()
+{
+    cin >> n >> m;
+    
+    arr.resize(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    
+    if (n == 1)
+    {
+        cout << 1 << '\n';
+        return;
+    }
 
+    coord_compress(arr);
+    
+    record.resize(2e5 + 1, 0);
+    int count = 0;
+    int r = -1;
+    ll ans = 0;
+    for (int i = 0; i < n; i++) 
+    {
+        while (r < n && count <= m) 
+        {
+            r++;
+            if (record[arr[r]] == 0) count++;
+            record[arr[r]]++;
+        }
+
+        ans += r - i;
+
+        record[arr[i]]--;
+        if (record[arr[i]] == 0) count--;
+    }
+    
+    cout << ans << '\n';
+}
+
+int main()
+{
+    fastio;
     solve();
-
     return 0;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//離散化
-//離散化
-//離散化
-
-#include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
- 
-using namespace std;
-__attribute__((optimize("-O3")))
- 
-int n, m;
-int arr[(int) 1e8+1];
-int arr2[(int) 1e8+1];
-int visited[(int) 2e5+1];
- 
-void solve() {
- 
-    cin >> n >> m;
-    for (int i = 1; i <= n; i++) {
-        cin >> arr[i];
-        arr2[i] = arr[i];
-    }
-    sort(arr2+1, arr2+n+1);
-    for (int i = 1; i <= n; i++) {
-        arr[i] = lower_bound(arr2+1, arr2+n+1, arr[i]) - arr2;
-    }
-    int ans = 0;
-    int cnt = 0;
-    int r = 0;
-    for (int i = 1; i <= n; i++) {
-        while (r <= n && cnt <= m) {
-            r++;
-            //cout << cnt << " " << arr[r] << " " << r << endl;
-            visited[arr[r]]++;
-            if (visited[arr[r]] == 1) {
-                cnt++;
-            }
-            //cout << cnt << " " << arr[r] << " " << r << endl;
-        }
-        //cout << endl;
-        //cout << r << " " << i << endl;
-        ans += r - i;
-        //cout << ans << endl << endl;
-        visited[arr[i]]--;
-        if (visited[arr[i]] == 0) {
-            cnt--;
-        }
-    }
-    cout << ans << endl;
-}
- 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
- 
-    solve();
- 
-    return 0;
-}
- 

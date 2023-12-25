@@ -1,56 +1,53 @@
-
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define db(x) cout << x << endl
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
- 
+
 using namespace std;
-__attribute__((optimize("-O3")))
- 
+
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n, m;
-pii arr[5000+1];
- 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
- 
+vector<pii> arr;
+
+void solve()
+{
     cin >> n >> m;
-    for (int i = 1; i <= n; i++) {
-        int a;
-        cin >> a;
-        arr[i] = mp(a, i);
+    
+    arr.resize(n);
+    for (int i = 0; i < n; i++) 
+    {
+        cin >> arr[i].first;
+        arr[i].second = i;
     }
-    sort(arr, arr+n+1, less<pii>());
-    bool flag = true;
-    for (int i = 2; i <= n-1; i++) {
-        int temp = m - arr[i].F;
-        int l = 1;
-        int r = n;
-        while (l < r) {
-            if (arr[l].F+arr[r].F == temp) {
-                flag = false;
-                int a[3] = {arr[l].S, arr[i].S, arr[r].S};
-                sort(a, a+3);
-                cout << a[0] << " " << a[1] << " " << a[2] << endl;
-            }
-            int a = arr[l].F + arr[r].F;
-            if (l + 1 != i && a < temp) {
-                l++;
-            } else
-            if (r - 1 != i && a > temp) {
-                r--;
-            } else
-                break;
+    
+    sort(arr.begin(), arr.end());
+    
+    for (int i = 0; i < n - 2; i++)
+    {
+        int l = i + 1;
+        int r = n - 1;
+        int sum = arr[i].first + arr[l].first + arr[r].first;
+        while (l < r && sum != m)
+        {
+            if (sum < m) l++;
+            if (sum > m) r--;
+            sum = arr[i].first + arr[l].first + arr[r].first;
+        }
+        if (l != r && sum == m ) 
+        {
+            cout << arr[l].second+1 << ' ' << arr[r].second+1 << ' ' << arr[i].second+1 << '\n';
+            return;
         }
     }
-    if (flag) {
-        cout << "IMPOSSIBLE" << endl;
-    }
- 
+    cout << "IMPOSSIBLE" << '\n';
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    solve();
+
     return 0;
 }
- 

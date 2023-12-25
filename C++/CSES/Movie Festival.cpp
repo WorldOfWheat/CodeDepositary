@@ -1,48 +1,48 @@
-
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
- 
+#include <ranges> 
+
 using namespace std;
-__attribute__((optimize("-O3")))
- 
+
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n;
-vector<pii> ve;
- 
-bool cmp(pii x, pii y) {
-    return (x.S < y.S);
-}
- 
-void solve() {
- 
+vector<pii> arr;
+vector<int> arr2;
+
+void solve()
+{
     cin >> n;
-    ve.resize(n+1);
-    for (int i = 1; i <= n; i++) {
-        int a, b;
-        cin >> a >> b;
-        ve[i] = mp(a, b);
+
+    arr.resize(n);
+    arr2.resize(n);
+
+    for (auto &i : arr) 
+    {
+        cin >> i.second >> i.first;
     }
-    sort(ve.begin(), ve.end(), cmp);
-    int last = 0;
+
+    sort(arr.begin(), arr.end());
+
     int ans = 0;
-    for (int i = 1; i <= n; i++) {
-        if (ve[i].F >= last) {
-            ans++;
-            last = ve[i].S;
-        }
+    int now = 0;
+    for (int i = 0; i < arr.size(); i++) 
+    {
+        if (arr[i].second < now) continue;
+        ans++;
+        now = arr[i].first;
     }
-    cout << ans << endl;
+
+    cout << ans << '\n';
 }
- 
-signed main() {
-    ios::sync_with_stdio(false);
+
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
- 
+    cout.tie(0);
+
     solve();
- 
+
     return 0;
 }

@@ -1,45 +1,35 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define INF (int) 1e18
-#define ln '\n'
 
 using namespace std;
 
 int n;
-set<int> se;
+vector<int> arr;
 
-void solve() {
-
+void solve()
+{
     cin >> n;
-
-    rep (i, 0, n) {
-        int in;
-        cin >> in;
-
-        se.insert(in);
+    arr.resize(n);
+    for (auto &i : arr)
+    {
+        cin >> i;
     }
 
-    cout << (se.size()) << ln;
+    sort(arr.begin(), arr.end());
+    arr.erase(
+        unique(arr.begin(), arr.end()),
+        arr.end()
+    );
 
+    cout << (arr.size()) << '\n';
 }
 
-signed main() {
-
+int main()
+{
     ios::sync_with_stdio(0);
     cin.tie(0);
-    
+    cout.tie(0);
+
     solve();
 
     return 0;
-
 }

@@ -1,83 +1,61 @@
 #include <bits/stdc++.h>
 
-typedef long long ll;
-
 using namespace std;
 
-ll q;
+typedef long long ll;
+typedef pair<int, int> pii;
+
+int t;
 ll n;
-vector<pair<ll, ll>> table;
-vector<ll> table_prefixSum;
+vector<ll> table;
+vector<ll> table2;
+vector<ll> table3;
 
-ll binary_search_table(ll x)
-{
-    if (x <= table_prefixSum[1])
+void pre() 
+{   
+    ll now = 9;
+    ll sum = 0;
+    ll start = 1;
+    for (int i = 1; i <= 17; i++) 
     {
-        return 0;
+        table.push_back(i * now + sum);
+        sum += i * now;
+        now *= 10;
+        table2.push_back(start);
+        start *= 10;
     }
-
-    ll result = 1;
-    for (ll i = table.size() / 2; i > 0; i >>= 1) 
-    {
-        while (result + i < table_prefixSum.size() && (table_prefixSum[result + i] < x))
-        {
-            result += i;
-        }
-    }
-
-    return result;
+    // for (int i = 0; i < table.size(); i++) cout << table[i] << '\n';
+    // for (int i = 0; i < table2.size(); i++) cout << table2[i] << '\n';
 }
 
-void solve() 
+void solve()
 {
-    ll lower = 1, upper = 9;
-    for (ll i = 1; i <= 18; i++)
-    {
-        table.push_back({lower, upper});
-        lower *= 10;
-        upper = upper * 10 + 9;
-    }
+    pre();
 
-    table_prefixSum.push_back(0);
-    for (ll i = 1; i <= 17; i++) {
-        table_prefixSum.push_back(table_prefixSum.back() + (table[i-1].second - table[i-1].first + 1) * i);
-    }
-
-    // for (auto i : table)
-    // {
-    //     cout << i.first << ' ' << i.second << '\n';
-    // }
-    // for (auto i : table_prefixSum)
-    // {
-    //     cout << i << '\n';
-    // }
-
-    cin >> q;
-
-    for (ll i = 0; i < q; i++)
+    cin >> t;
+    while (t--) 
     {
         cin >> n;
-        if (n <= 9)
+        if (n <= 9) 
         {
             cout << n << '\n';
             continue;
         }
-        ll length = binary_search_table(n) + 1;
-        ll tmp = n - table_prefixSum[length - 1]; 
-        ll number = table[length - 1].first + tmp / length;
-        // cout << tmp << ' ' << length << '\n';
-        if ((tmp % length) == 0)
-        {
-            number--;
-            cout << (number % 10) << '\n';
-            continue;
-        }
-
-        cout << to_string(number)[tmp % length - 1] << '\n';
+        auto it = lower_bound(table.begin(), table.end(), n);
+        int index = it - table.begin();
+        ll backward = n - table[index - 1];
+        ll digit = backward / (index + 1);
+        if (backward % (index + 1) == 0) digit--;
+        ll num = table2[index] + digit;
+        int pos = backward % (index + 1);
+        if (pos == 0) pos = index + 1;
+        pos--;
+        // cout << index << ' ' << backward << ' ' << digit << ' ' << num << ' ' << pos << "\n";
+        cout << (to_string(num)[pos]) << '\n';
     }
 }
 
-signed main()
+int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);

@@ -1,57 +1,52 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n, m;
-vector<int> table;
-vector<pii> ve;
 multiset<int> ms;
+vector<int> arr;
 
-void solve() {
-
+void solve()
+{
     cin >> n >> m;
+    arr.resize(m);
 
-    table.resize(m);
-    ve.resize(m);
-    fill(table.begin(), table.end(), -1);
-
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        ms.insert(a);
-    }
-    for (int i = 0; i < m; i++) {
-        int a;
-        cin >> a;
-        ve[i].F = a;
-        ve[i].S = i;
+    for (int i = 0; i < n; i++)
+    {
+        int tmp;
+        cin >> tmp;
+        ms.insert(tmp);
     }
 
-    for (int i = 0; i < m && ms.size(); i++) {
+    for (auto i : arr)
+    {
+        cin >> i;
+    }
 
-        pii top = ve[i];
-        auto it = ms.upper_bound(top.F);
-        if (it != ms.begin()) it--;
-        if ( (*it) <= top.F ) {
-            table[top.S] = *it;
-            ms.erase(it);
+    for (auto i : arr)
+    {
+        auto it = ms.upper_bound(i);
+        if (it == ms.begin())
+        {
+            cout << -1 << '\n';
+            continue;
         }
-    }
 
-    for (int i = 0; i < m; i++) {
-        cout << table[i] << "\n";
+        it = prev(it);
+
+        cout << (*it) << '\n';
+        ms.erase(it);
     }
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

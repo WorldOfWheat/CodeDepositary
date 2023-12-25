@@ -6,29 +6,26 @@ typedef long long ll;
 typedef pair<int, int> pii;
 
 int n;
-vector<int> arr;
+stack<pii> st;
 
 void solve()
 {
     cin >> n;
-
-    arr.resize(n + 1);
-
-    arr[0] = 1e9;
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
         int a;
         cin >> a;
-        arr[a] = i;
-    }
 
-    int ans = 0;
-    for (int i = 1; i <= n; i++)
-    {
-        if (arr[i] < arr[i - 1]) ans++;
-    }
+        while (st.size() && st.top().first >= a) st.pop();
 
-    cout << ans << '\n';
+        if (st.empty())
+            cout << '0' << ' ';
+        else
+            cout << st.top().second << ' ';
+
+        st.push({a, i + 1});
+    }
+    cout << '\n';
 }
 
 int main()

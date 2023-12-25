@@ -1,63 +1,46 @@
 #include <bits/stdc++.h>
-#define int long long
-#define V vector<int>
-#define VV vector<V>
-#define VP vector<pii>
-#define VVP vector<VP>
-#define pii pair<int, int>
-#define F first
-#define S second
-#define rep(x, y, z) for(int x = y; x < z; x++)
-#define rep2(x, y, z) for(int x = y; x <= z; x++)
-#define rrep(x, y, z) for(int x = y; x >= z; x--)
-#define INF (int) 1e18
-#define ln '\n'
 
 using namespace std;
+
+typedef long long ll;
 
 int n, m;
 set<int> se;
 multiset<int> ms;
 
-void solve() {
-
-    cin >> n >> m; 
+void solve()
+{
+    cin >> n >> m;
 
     se.insert(0);
     se.insert(n);
     ms.insert(n);
 
-    rep (i, 0, m) {
-        int in;
-        cin >> in;
+    for (int i = 0; i < m; i++)
+    {
+        int a;
+        cin >> a;
 
-        auto it = prev(se.lower_bound(in));
-        auto it2 = se.lower_bound(in);
-        int k = *it2 - *it;
+        int r = *(se.upper_bound(a));
+        int l = *(prev(se.lower_bound(a)));
 
-        ms.erase(ms.lower_bound(k));
+        ms.erase(ms.lower_bound(r - l));
+        ms.insert(r - a);
+        ms.insert(a - l);
+        se.insert(a);
 
-        int middleToLeft = in - (*it);
-        int middleToRight = (*it2) - in;
-
-        se.insert(in);
-        ms.insert(middleToLeft);
-        ms.insert(middleToRight);
-
-        cout << *(ms.rbegin()) << ln;
-
+        cout << (*(ms.rbegin())) << ' ';
     }
-
+    cout << '\n';
 }
 
-signed main() {
-
+int main()
+{
     ios::sync_with_stdio(0);
     cin.tie(0);
-    
+    cout.tie(0);
+
     solve();
 
     return 0;
-
 }
-

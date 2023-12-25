@@ -1,52 +1,40 @@
 #include <bits/stdc++.h>
-#define int long long
-#define pii pair<int, int>
-#define tp tuple<int, int, int>
-#define mp(x, y) make_pair(x, y)
-#define F first
-#define S second
 
 using namespace std;
 
+typedef long long ll;
+typedef pair<int, int> pii;
+
 int n;
-priority_queue<pii, vector<pii>, greater<pii>> pq;
-priority_queue<int, vector<int>, greater<int>> pq2;
+map<int, int> ma;
 
-void solve() {
-
+void solve()
+{
     cin >> n;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++)
+    {
         int a, b;
         cin >> a >> b;
-        pq.push({a, b});
+        ma[a] += 1;
+        ma[b] -= 1;
     }
 
+    int now = 0;
     int ans = 0;
-
-    while (pq.size()) {
-        pii top = pq.top();
-        pq.pop();
-
-        if (pq2.empty() || pq2.top() <= top.F) {
-            if (pq2.size()) {
-                pq2.pop();
-            }
-            pq2.push(top.S);
-
-        }
-        else {
-            pq2.push(top.S);
-        }
-        int temp = pq2.size();
-        ans = max(ans, temp);
+    for (auto i : ma)
+    {
+        now += i.second;
+        ans = max(ans, now);
     }
-    cout << ans << "\n";
 
+    cout << ans << '\n';
 }
 
-signed main() {
-    ios::sync_with_stdio(false);
+int main()
+{
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
     solve();
 

@@ -1,55 +1,53 @@
 #include <bits/stdc++.h>
+#define fastio ios::sync_with_stdio; cin.tie(0); cout.tie(0)
+#define debug(container) for (auto i : container) cerr << i << ' '; cerr << '\n';
 
 using namespace std;
 
-int n, m;
-vector<pair<int, int>> arr;
+typedef long long ll;
+typedef pair<int, int> pii;
 
-void solve() 
+
+int n, m;
+vector<pii> arr;
+
+void solve()
 {
     cin >> n >> m;
+    
     arr.resize(n);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) 
     {
         cin >> arr[i].first;
-        arr[i].second = i;
+        arr[i].second = i + 1;
     }
-
     sort(arr.begin(), arr.end());
-
+    
     for (int i = 0; i < n - 3; i++)
     {
-        for (int j = i + 1; j < n - 2; j++)
+        for (int j = i + 1; j < n - 2; j++) 
         {
-            int ptrL = j + 1;
-            int ptrR = n - 1;
-            while (ptrL < ptrR)
+            int l = j + 1, r = n - 1;
+            int sum = arr[i].first + arr[j].first + arr[l].first + arr[r].first;
+            while (l < r)
             {
-                int sum = arr[i].first + arr[j].first + arr[ptrL].first + arr[ptrR].first;
-                if (sum == m)
+                if (sum > m) r--;
+                if (sum < m) l++;
+                if (sum == m) 
                 {
-                    cout << arr[i].second + 1 << ' ' << arr[j].second + 1 << ' ' << arr[ptrL].second + 1 << ' ' << arr[ptrR].second + 1 << '\n';
+                    cout << arr[i].second << ' ' << arr[j].second << ' ' << arr[l].second << ' ' << arr[r].second << '\n';
                     return;
                 }
-                if (sum > m)
-                {
-                    ptrR--;
-                    continue;
-                }
-                ptrL++;
+                sum = arr[i].first + arr[j].first + arr[l].first + arr[r].first;
             }
         }
     }
-
     cout << "IMPOSSIBLE" << '\n';
 }
 
-signed main() 
+int main()
 {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
+    fastio;
     solve();
-
     return 0;
 }
