@@ -8,7 +8,7 @@ typedef pair<int, int> pii;
 int n, m;
 vector<int> arr;
 vector<ll> prefix_sum;
-map<ll, int> ma;
+unordered_map<ll, int> um;
 
 void solve()
 {
@@ -18,14 +18,14 @@ void solve()
     prefix_sum.resize(n + 1);
     for (int i = 0; i < n; i++) cin >> arr[i];
 
-    ma[0] = 1;
+    um[0] = 1;
     ll ans = 0;
     for (int i = 0; i < n; i++) 
     {
         prefix_sum[i+1] = prefix_sum[i] + arr[i];
         ll remain = m - prefix_sum[i+1];
-        ans += ma[-remain];
-        ma[prefix_sum[i+1]]++;
+        ans += um[-remain];
+        um[prefix_sum[i+1]]++;
     }
     
     cout << ans << '\n';
